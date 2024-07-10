@@ -1,6 +1,6 @@
 
 // import { FooterComponent } from "@/components/FooterComponent/FooterComponent";
-import { NavbarComponent } from "@/components/NavbarComponent/NavbarComponent";
+// import { NavbarComponent } from "@/components/NavbarComponent/NavbarComponent";
 import type { Metadata } from "next";
 import { montserrat } from "@/app/utils/font"
 import '@/app/utils/styles/global.css'
@@ -21,7 +21,7 @@ export default function RootLayout({
 
     <html>
       <body className={montserrat.className}>
-      <NavbarComponent />
+      {/* <NavbarComponent /> */}
        {children}
       {/* <FooterComponent /> */}
       </body>

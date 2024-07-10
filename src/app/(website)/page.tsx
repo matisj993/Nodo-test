@@ -7,9 +7,10 @@ import { HerramientasComponent } from "@/components/HerramientasComponent/Herram
 export default function AppContainer() {
   return (
     <div>
-      <HeaderComponent/>
+      <NotFoundComponent/>
+      {/* <HeaderComponent/>
       <PaidMediaComponent/>
-      <HerramientasComponent/>
+      <HerramientasComponent/> */}
     </div>
   );
 }
