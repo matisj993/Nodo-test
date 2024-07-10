@@ -1,10 +1,11 @@
 
-import { FooterComponent } from "@/components/FooterComponent/FooterComponent";
+// import { FooterComponent } from "@/components/FooterComponent/FooterComponent";
 import { NavbarComponent } from "@/components/NavbarComponent/NavbarComponent";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { montserrat } from "@/app/utils/font"
+import '@/app/utils/styles/global.css'
 
-const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "Nodo - Paid Media Solutions",
@@ -19,10 +20,10 @@ export default function RootLayout({
   return (
 
     <html>
-      <body>
+      <body className={montserrat.className}>
       <NavbarComponent />
        {children}
-      <FooterComponent />
+      {/* <FooterComponent /> */}
       </body>
     </html>
 
