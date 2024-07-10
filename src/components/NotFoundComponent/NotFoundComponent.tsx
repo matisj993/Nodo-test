@@ -15,7 +15,7 @@ export const NotFoundComponent = () => {
           </p>
           <div className={styles["button-container"]}>
 
-          <Link className={styles["button"]} href="mailto:pareralucenamelisa@gmail.com">
+          <Link className={styles["button"]} href="mailto:">
             Contactanos
           </Link>
           </div>
