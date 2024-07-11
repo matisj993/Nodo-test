@@ -17,6 +17,10 @@ export const HerramientasComponent = () => {
       src: "/img/CHAT.png",
       alt: "ChatGPT",
     },
+    {
+      src: "/img/googletrends.png",
+      alt: "Google Trends",
+    },
   ];
   return (
     <div className={styles["container"]}>
@@ -33,14 +37,16 @@ export const HerramientasComponent = () => {
           </p>
         </div>
       </div>
+      <div className={styles["vertical-divider-container"]}>
+        <div className={styles["vertical-divider"]} />
+      </div>
       <div className={styles["half-white"]}>
         <div className={styles["icons-grid"]}>
-        {icons.map((icon, index) => (
-          <div className={styles["icon-container"]} key={index}>
-            <img className={styles["icon"]}src={icon.src} alt={icon.alt} />
-          </div>
-        ))}
-            
+          {icons.map((icon, index) => (
+            <div className={styles["icon-container"]} key={index}>
+              <img className={styles["icon"]} src={icon.src} alt={icon.alt} />
+            </div>
+          ))}
         </div>
       </div>
     </div>
