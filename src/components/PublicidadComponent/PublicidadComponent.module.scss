@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    height: 70vh;
+    height: 100vh;
     overflow: hidden;
 
     @media (max-width:768px) {
@@ -36,7 +36,7 @@
 
     @media (max-width:768px) {
         width: 100%;
-        height: 25vh;
+        height: 20vh;
     }
 
 }
@@ -84,13 +84,13 @@
 .icons-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0rem 5rem;
+    gap: 2rem 3rem;
     justify-items: center;
     align-items: center;
     padding: 20px;
 
     @media (max-width:768px) {
-        gap: 0rem 1rem;
+        gap: 1rem 2rem;
         grid-template-columns: repeat(3, 1fr);
 
     }
@@ -103,13 +103,13 @@
 }
 
 .icon {
-    width: 180px;
-    height: 180px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
 
     @media (max-width:768px) {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
     }
 }
 

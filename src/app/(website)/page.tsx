@@ -4,6 +4,7 @@ import { NotFoundComponent } from "@/components/NotFoundComponent/NotFoundCompon
 import { PaidMediaComponent } from "@/components/PaidMediaComponent/PaidMediaComponent";
 import { HerramientasComponent } from "@/components/HerramientasComponent/HerramientasComponent";
 import { QueHacemosComponent } from "@/components/QueHacemosComponent/QueHacemosComponent";
+import { PublicidadComponent } from "@/components/PublicidadComponent/PublicidadComponent";
 
 export default function AppContainer() {
   return (
@@ -13,6 +14,7 @@ export default function AppContainer() {
       <PaidMediaComponent/>
       <HerramientasComponent/>
       <QueHacemosComponent/>
+      <PublicidadComponent/>
     </div>
   );
 }
