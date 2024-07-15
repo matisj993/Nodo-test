@@ -1,4 +1,34 @@
+'use client'
+
 import styles from "./HerramientasComponent.module.scss";
+import { motion, Variants } from "framer-motion";
+
+const containerVariants: Variants = {
+  offscreen: {
+  },
+  onscreen: {
+    transition: {
+      staggerChildren: 0.4,
+    },
+  },
+};
+
+const iconVariants: Variants = {
+  offscreen: {
+    opacity: 0,
+    y: 20,
+  },
+  onscreen: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 1,
+    },
+  },
+};
+
 export const HerramientasComponent = () => {
   const icons = [
     {
@@ -41,13 +71,16 @@ export const HerramientasComponent = () => {
         <div className={styles["vertical-divider"]} />
       </div>
       <div className={styles["half-white"]}>
-        <div className={styles["icons-grid"]}>
+        <motion.div initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants} className={styles["icons-grid"]}>
           {icons.map((icon, index) => (
-            <div className={styles["icon-container"]} key={index}>
+            <motion.div variants={iconVariants} className={styles["icon-container"]} key={index}>
               <img className={styles["icon"]} src={icon.src} alt={icon.alt} />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

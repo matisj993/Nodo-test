@@ -1,4 +1,50 @@
+'use client'
+
 import styles from "./QueHacemosComponent.module.scss";
+import { motion, Variants } from "framer-motion";
+
+const textVariants: Variants = {
+  offscreen: {
+    opacity: 0,
+    y: 100,
+  },
+  onscreen: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 1.3,
+      delay: 0,
+    },
+  },
+};
+
+const containerVariants: Variants = {
+  offscreen: {
+  },
+  onscreen: {
+    transition: {
+      staggerChildren: 0.4,
+    },
+  },
+};
+
+const iconVariants: Variants = {
+  offscreen: {
+    opacity: 0,
+    y: 20,
+  },
+  onscreen: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 1,
+    },
+  },
+};
 
 export const QueHacemosComponent = () => {
   const cards = [
@@ -41,13 +87,15 @@ export const QueHacemosComponent = () => {
   ];
 
   return (
-    <div className={styles["section-container"]}>
+    <motion.div initial="offscreen"
+    whileInView="onscreen"
+    viewport={{ once: true, amount: 0.2 }} className={styles["section-container"]}>
       <div className={styles["title-container"]}>
-        <p className={styles["title"]}>¿Qué hacemos?</p>
+        <motion.p variants={textVariants} className={styles["title"]}>¿Qué hacemos?</motion.p>
       </div>
-      <div className={styles["grid-container"]}>
+      <motion.div variants={containerVariants} className={styles["grid-container"]}>
         {cards.map((card, index) => (
-          <div key={index} className={styles["card-container"]}>
+          <motion.div variants={iconVariants}key={index} className={styles["card-container"]}>
             <div className={styles["image-container"]}>
               <img className={styles["image"]} src={card.src} alt={card.alt} />
             </div>
@@ -55,9 +103,9 @@ export const QueHacemosComponent = () => {
               <h3 className={styles["title-card"]}>{card.title}</h3>
               <p className={styles["info-card"]}>{card.text}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
