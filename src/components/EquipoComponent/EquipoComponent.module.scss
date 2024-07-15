@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url('/img/fondoIman.png');
+    background-image: url('/img/fondoRompecabezas.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -13,7 +13,23 @@
 
     @media (max-width:768px) {
         justify-content: center;
-        height: 70vh;
+        height:40vh;
+    }
+}
+
+.title {
+
+    text-align: start;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color:white;
+    width: 25%;
+    @media (max-width:768px) {
+        font-size: 1.5rem;
+        width: 90%;
+        text-align: center;
     }
 }
 
@@ -31,7 +47,7 @@
 
 }
 
-.logo{
+.logo {
     width: 25rem;
     height: 15rem;
 
@@ -48,11 +64,10 @@
     line-height: 2rem;
     width: 30rem;
     margin: 0;
-    margin-left: 1.5rem;
+
     @media (max-width:768px) {
-        font-size: 0.8rem;
-        margin-left: 0rem;
-        width: 60%;
+        font-size: 0.9rem;
+        width: 90%;
         line-height: normal;
         text-align: center;
     }
