@@ -1,5 +1,6 @@
 'use client'
 
+import Link from "next/link";
 import styles from "./HeaderComponent.module.scss";
 import { motion } from "framer-motion";
 
@@ -29,6 +30,9 @@ export const HeaderComponent = () => {
           Somos especialistas en conectar marcas con consumidores utilizando
           plataformas digitales pagas.
         </motion.p>
+          <Link className={styles["button"]} href="#contacto">
+            CONTACTA CON NOSOTROS
+          </Link>
       </motion.div>
     </div>
   );

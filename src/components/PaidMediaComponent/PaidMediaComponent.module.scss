@@ -2,23 +2,25 @@
     display: flex;
     height: 100vh;
     overflow: hidden;
+
     @media (max-width:768px) {
         flex-direction: column;
-        height: 50vh;
+        height: 65vh;
     }
 }
 
 .half-blue {
     width: 50%;
     height: 100%;
-    background-color: #0040b2;
+    background-color: #3122e5;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+
     @media (max-width:768px) {
         width: 100%;
-        height: 25vh;
+        height: 40vh;
     }
 }
 
@@ -30,6 +32,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
     @media (max-width:768px) {
         width: 100%;
         height: 25vh;
@@ -40,13 +43,33 @@
 .text-container-left {
     color: white;
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: start;
+    align-items: flex-start;
+    margin-right: 3rem;
+
     @media (max-width:768px) {
         width: 100%;
-        padding-left: 2rem; 
+        padding-left: 2rem;
         padding-right: 2rem;
 
     }
 
+}
+
+.section-title {
+    font-size: 1rem;
+    text-decoration: underline;
+    text-underline-offset: 14px;
+    font-weight: 200;
+    color: white;
+    text-align: center;
+
+    @media (max-width: 768px) {
+        font-size: 0.7rem;
+    }
 }
 
 .title {
@@ -55,6 +78,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
     @media (max-width:768px) {
         font-size: 1.5rem;
     }
@@ -63,7 +87,7 @@
 
 .subtitle {
     text-align: start;
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-style: normal;
     line-height: 2rem;
 
@@ -74,7 +98,7 @@
 
 }
 
-.text-container-right{
+.text-container-right {
     width: 60%;
     justify-content: center;
     align-items: center;
@@ -85,12 +109,13 @@
 
     }
 
- 
+
 }
 
-.image{
+.image {
     width: 25rem;
     height: 25rem;
+
     @media (max-width:768px) {
         width: 100px;
         height: 100px;
@@ -100,19 +125,19 @@
 
 .info {
     text-align: start;
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-style: normal;
     line-height: 2rem;
+    margin-bottom: 7rem;
 
-    .bold-text{
+    .bold-text {
         font-weight: bold;
     }
 
     @media (max-width:768px) {
         font-size: 0.9rem;
         line-height: 1rem;
+        margin-bottom: 0rem;
     }
-
-
 
 }

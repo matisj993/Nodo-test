@@ -1,7 +1,34 @@
-import styles from "./PublicidadComponent.module.scss"
+"use client";
+import styles from "./PublicidadComponent.module.scss";
+import { motion, Variants } from "framer-motion";
+
+const containerVariants: Variants = {
+  offscreen: {},
+  onscreen: {
+    transition: {
+      staggerChildren: 0.4,
+    },
+  },
+};
+
+const iconVariants: Variants = {
+  offscreen: {
+    opacity: 0,
+    y: 20,
+  },
+  onscreen: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 1,
+    },
+  },
+};
 
 export const PublicidadComponent = () => {
-   const icons = [
+  const icons = [
     {
       src: "/img/instagram.svg",
       alt: "icon1",
@@ -23,21 +50,30 @@ export const PublicidadComponent = () => {
       alt: "icon5",
     },
     {
-        src: "/img/Google.svg",
-        alt: "icon6",
+      src: "/img/Google.svg",
+      alt: "icon6",
     },
   ];
   return (
     <div className={styles["container"]}>
-   
       <div className={styles["half-white"]}>
-        <div className={styles["icons-grid"]}>
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+          className={styles["icons-grid"]}
+        >
           {icons.map((icon, index) => (
-            <div className={styles["icon-container"]} key={index}>
+            <motion.div
+              variants={iconVariants}
+              className={styles["icon-container"]}
+              key={index}
+            >
               <img className={styles["icon"]} src={icon.src} alt={icon.alt} />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <div className={styles["vertical-divider-container"]}>
@@ -46,19 +82,15 @@ export const PublicidadComponent = () => {
 
       <div className={styles["half-blue"]}>
         <div className={styles["text-container-left"]}>
-          <h2 className={styles["title"]}>
-            Nos basamos en herramientas que eficientizan nuestra operación.
-          </h2>
+          <h2 className={styles["title"]}>Análisis y seguimiento de datos</h2>
           <p className={styles["subtitle"]}>
-            Desde plataformas de gestión de anuncios hasta herramientas de
-            análisis y seguimiento de datos, apoyandonos en tecnología de
-            vanguardia para optimizar el rendimiento de las campañas
-            publicitarias.
+            Desde redes sociales como Facebook, Instagram y Twitter, hasta
+            plataformas de búsqueda como Google, así como espacios publicitarios
+            en sitios web y aplicaciones móviles, nuestra cobertura abarca todos
+            los rincones del mundo digital.
           </p>
         </div>
       </div>
-
-      
     </div>
   );
-}
+};
