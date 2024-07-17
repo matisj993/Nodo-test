@@ -1,5 +1,5 @@
 
-// import { FooterComponent } from "@/components/FooterComponent/FooterComponent";
+import { FooterComponent } from "@/components/FooterComponent/FooterComponent";
 import { NavbarComponent } from "@/components/NavbarComponent/NavbarComponent";
 import type { Metadata } from "next";
 import { montserrat } from "@/app/utils/font"
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={montserrat.className}>
       <NavbarComponent />
        {children}
-      {/* <FooterComponent /> */}
+      <FooterComponent />
       </body>
     </html>
 

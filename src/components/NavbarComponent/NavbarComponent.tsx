@@ -1,15 +1,31 @@
+'use client'
 
+import { useEffect, useState } from "react";
 import styles from "./NavbarComponent.module.scss"
 export const NavbarComponent = () => {
+
+  const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+          console.log(window.scrollY);
+            if (window.scrollY > 300) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        
+    }, []);
     return(
-        <nav className={styles.navbar}>
+        <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
         <ul className={styles.navList}>
-          <li className={styles.navItem}><a href="#home">Herramientas</a></li>
-          <li className={styles.navItem}><a href="#about">Qué hacemos</a></li>
-          <li className={styles.navItem}><a href="#services">Publicidad</a></li>
-          <li className={styles.navItem}><a href="#contact">Nosotros</a></li>
-          <li className={styles.navItem}><a href="#contact">Partners</a></li>
-          <li className={styles.navItem}><a href="#contact">Contacto</a></li>
+          <li className={styles.navItem}><a href="#servicios">SERVICIOS</a></li>
+          <li className={styles.navItem}><a href="#herramientas">HERRAMIENTAS</a></li>
+          <li className={styles.navItem}><a href="#nosotros">NOSOTROS</a></li>
+          <li className={styles.navItem}><a href="#contacto">CONTACTO</a></li>
         </ul>
       </nav>
     )

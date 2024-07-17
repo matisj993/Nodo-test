@@ -30,6 +30,9 @@ export const PaidMediaComponent = () => {
           viewport={{ once: true, amount: 0.2 }}
           className={styles["text-container-left"]}
         >
+          <motion.p className={styles["section-title"]} variants={textVariants}>
+            TE OFRECEMOS
+          </motion.p>
           <motion.h2 variants={textVariants} className={styles["title"]}>
             Ofrecemos un servicio integral de paid media
           </motion.h2>

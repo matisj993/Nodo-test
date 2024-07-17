@@ -1,5 +1,10 @@
+'use client'
+
 import SliderComponent from "../SliderComponent/SliderComponent";
 import styles from "./PartnersComponent.module.scss"
+import { motion, Variants } from "framer-motion";
+
+
 const images = [
     { src: '/img/av.svg', alt: 'Image 1' },
     { src: '/img/BLOP.svg', alt: 'Image 2' },
@@ -12,12 +17,31 @@ const images = [
 
   ];
 
+  const textAnimation: Variants = {
+    offscreen: {
+      opacity: 0,
+      y: 80,
+    },
+    onscreen: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        bounce: 0.2,
+        duration: 1.8,
+        delay: 0,
+      },
+    },
+  };
+
 
 export const PartnersComponent = () => {
     return(
-        <div className={styles['container-section']}>
-            <h2 className={styles['title']}>Formamos equipo</h2>
+        <motion.div initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.2 }}className={styles['container-section']}>
+            <motion.h2 variants={textAnimation}className={styles['title']}>PARTNERS</motion.h2>
             <SliderComponent images={images}/>
-        </div>
+        </motion.div>
     )
 }

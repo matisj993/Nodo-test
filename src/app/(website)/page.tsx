@@ -7,7 +7,6 @@ import { QueHacemosComponent } from "@/components/QueHacemosComponent/QueHacemos
 import { PublicidadComponent } from "@/components/PublicidadComponent/PublicidadComponent";
 import { ComoLoHacemosComponent } from "@/components/ComoLoHacemos/ComoLoHacemos";
 import { EquipoComponent } from "@/components/EquipoComponent/EquipoComponent";
-import { FooterComponent } from "@/components/FooterComponent/FooterComponent";
 import { ClientesComponent } from "@/components/ClientesComponent/ClientesComponent";
 import { PartnersComponent } from "@/components/PartnersComponent/PartnersComponent";
 import { ContactComponent } from "@/components/ContactComponent/ContactComponent";
@@ -17,16 +16,15 @@ export default function AppContainer() {
     <div>
       {/* <NotFoundComponent/> */}
       <HeaderComponent/>
+      <ClientesComponent/>
       <PaidMediaComponent/>
-      <HerramientasComponent/>
       <QueHacemosComponent/>
-      <PublicidadComponent/>
       <ComoLoHacemosComponent/>
+      <HerramientasComponent/>
+      <PublicidadComponent/>
       <EquipoComponent/>
       <ContactComponent/>
-      <ClientesComponent/>
       <PartnersComponent/>
-      <FooterComponent/>
     </div>
   );
 }

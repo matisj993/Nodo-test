@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import styles from "./QueHacemosComponent.module.scss";
 import { motion, Variants } from "framer-motion";
@@ -21,8 +21,7 @@ const textVariants: Variants = {
 };
 
 const containerVariants: Variants = {
-  offscreen: {
-  },
+  offscreen: {},
   onscreen: {
     transition: {
       staggerChildren: 0.4,
@@ -87,15 +86,31 @@ export const QueHacemosComponent = () => {
   ];
 
   return (
-    <motion.div initial="offscreen"
-    whileInView="onscreen"
-    viewport={{ once: true, amount: 0.2 }} className={styles["section-container"]}>
+    <motion.div
+    id="servicios"
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: true, amount: 0.2 }}
+      className={styles["section-container"]}
+    >
       <div className={styles["title-container"]}>
-        <motion.p variants={textVariants} className={styles["title"]}>¿Qué hacemos?</motion.p>
+        <motion.p variants={textVariants} className={styles["section-title"]}>
+          SERVICIOS
+        </motion.p>
+        <motion.p variants={textVariants} className={styles["title"]}>
+          ¿Qué hacemos?
+        </motion.p>
       </div>
-      <motion.div variants={containerVariants} className={styles["grid-container"]}>
+      <motion.div
+        variants={containerVariants}
+        className={styles["grid-container"]}
+      >
         {cards.map((card, index) => (
-          <motion.div variants={iconVariants}key={index} className={styles["card-container"]}>
+          <motion.div
+            variants={iconVariants}
+            key={index}
+            className={styles["card-container"]}
+          >
             <div className={styles["image-container"]}>
               <img className={styles["image"]} src={card.src} alt={card.alt} />
             </div>

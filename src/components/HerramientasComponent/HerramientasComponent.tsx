@@ -53,9 +53,12 @@ export const HerramientasComponent = () => {
     },
   ];
   return (
-    <div className={styles["container"]}>
+    <div id="herramientas" className={styles["container"]}>
       <div className={styles["half-blue"]}>
         <div className={styles["text-container-left"]}>
+        <p className={styles["section-title"]}>
+            HERRAMIENTAS Y PLATAFORMAS
+          </p>
           <h2 className={styles["title"]}>
             Nos basamos en herramientas que eficientizan nuestra operación.
           </h2>
