@@ -1,0 +1,58 @@
+.section-container-notify {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    background-color: transparent;
+    z-index: 10000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    user-select: none;
+    pointer-events: none;
+
+    .notification-container {
+        height: 75px;
+        color: white;
+        animation-name: fade-in-out;
+        animation-duration: 5s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+        opacity:0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 1.25rem;
+        border-radius: 15px;
+        border: 1px solid rgba(154, 152, 152, 1);
+        background-color: rgba(192, 15, 38, 1);
+        color: rgba(255, 255, 255, 1);
+
+        .text {
+            font-weight: 600;
+        }
+    }
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
