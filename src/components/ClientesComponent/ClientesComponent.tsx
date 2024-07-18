@@ -28,7 +28,7 @@ const images = [
       transition: {
         type: "spring",
         bounce: 0.2,
-        duration: 1.8,
+        duration: 4,
         delay: 0,
       },
     },

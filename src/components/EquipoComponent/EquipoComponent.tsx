@@ -5,7 +5,7 @@ import { motion, Variants } from "framer-motion";
   const textVariants: Variants = {
     offscreen: {
       opacity: 0,
-      y: 60,
+      y: 100,
     },
     onscreen: {
       opacity: 1,
@@ -13,7 +13,7 @@ import { motion, Variants } from "framer-motion";
       transition: {
         type: "spring",
         bounce: 0.2,
-        duration: 2,
+        duration: 4,
         delay: 0,
       },
     },
@@ -30,7 +30,7 @@ import { motion, Variants } from "framer-motion";
       transition: {
         type: "spring",
         bounce: 0.2,
-        duration: 2,
+        duration: 4,
         delay: 0,
       },
     },

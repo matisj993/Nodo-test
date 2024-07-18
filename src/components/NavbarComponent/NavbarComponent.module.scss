@@ -11,9 +11,7 @@
     z-index: 10; 
     transition: background-color 0.3s ease-in-out;
  
-    @media (max-width:768px) {
-      display: none;
-  }
+
   }
 
   .scrolled {
@@ -25,6 +23,33 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    @media (max-width:768px) {
+      display: none;
+    }
+  }
+
+  .logo {
+    position: absolute;
+    left: 10rem;
+    bottom: 1.4rem;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    @media (max-width:768px) {
+      bottom: 1.1rem;
+      left: 9rem;
+      
+    }
+  
+    img {
+      height: 30px; 
+      @media (max-width:768px) {
+        height: 20px;
+      }
+    }
+  }
+  
+  .logoVisible {
+    opacity: 1;
   }
   
   .navItem {
@@ -52,4 +77,14 @@
       }
     }
   }
+
+  
+
+  .header-menu{
+    display: flex;
+    position: relative;
+    @media (min-width:768px) {
+     display: none;
+    }
+}
   

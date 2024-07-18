@@ -20,7 +20,7 @@ const images = [
   const textAnimation: Variants = {
     offscreen: {
       opacity: 0,
-      y: 80,
+      y: 100,
     },
     onscreen: {
       opacity: 1,
@@ -28,7 +28,7 @@ const images = [
       transition: {
         type: "spring",
         bounce: 0.2,
-        duration: 1.8,
+        duration: 4,
         delay: 0,
       },
     },

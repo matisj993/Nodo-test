@@ -8,7 +8,7 @@ const containerVariants: Variants = {
   },
   onscreen: {
     transition: {
-      staggerChildren: 0.4,
+      staggerChildren: 0.8,
     },
   },
 };
@@ -24,7 +24,7 @@ const iconVariants: Variants = {
     transition: {
       type: "spring",
       bounce: 0.2,
-      duration: 1,
+      duration: 2,
     },
   },
 };

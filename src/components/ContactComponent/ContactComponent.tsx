@@ -8,15 +8,15 @@ import NotifyComponent from "../NotifyComponent/NotifyComponent";
 const textVariants: Variants = {
   offscreen: {
     opacity: 0,
-    y: 60,
+    y: 200,
   },
   onscreen: {
     opacity: 1,
     y: 0,
     transition: {
       type: "spring",
-      bounce: 0.2,
-      duration: 1.3,
+      bounce: 0.6,
+      duration: 5,
       delay: 0,
     },
   },
@@ -133,7 +133,7 @@ export const ContactComponent = ({
         <motion.form
           onSubmit={handleFormSubmit}
           encType="multipart/form-data"
-          variants={infoAnimation}
+          variants={textVariants}
           className={styles["form-container"]}
         >
           <p className={styles["required-text"]}>*Todos los campos son requeridos</p>

@@ -10,13 +10,13 @@ export const HeaderComponent = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 2 }}
         className={styles["text-container"]}
       >
         <motion.img
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          transition={{ duration: 2, delay: 0.3 }}
           src="/img/nodoLogo.svg"
           alt="logo"
           className={styles["logo"]}
@@ -24,7 +24,7 @@ export const HeaderComponent = () => {
         <motion.p
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 2, delay: 0.5 }}
           className={styles["subtitle"]}
         >
           Somos especialistas en conectar marcas con consumidores utilizando
