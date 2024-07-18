@@ -15,7 +15,7 @@ export const PaidMediaComponent = () => {
       transition: {
         type: "spring",
         bounce: 0.2,
-        duration: 1.3,
+        duration: 3,
         delay: 0,
       },
     },

@@ -6,7 +6,7 @@ import { motion, Variants } from "framer-motion";
 const textVariants: Variants = {
   offscreen: {
     opacity: 0,
-    y: 100,
+    y: 200,
   },
   onscreen: {
     opacity: 1,
@@ -14,7 +14,7 @@ const textVariants: Variants = {
     transition: {
       type: "spring",
       bounce: 0.2,
-      duration: 1.3,
+      duration: 3,
       delay: 0,
     },
   },
@@ -24,7 +24,7 @@ const containerVariants: Variants = {
   offscreen: {},
   onscreen: {
     transition: {
-      staggerChildren: 0.4,
+      staggerChildren: 0.8,
     },
   },
 };
