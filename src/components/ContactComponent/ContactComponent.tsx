@@ -15,7 +15,7 @@ const textVariants: Variants = {
     y: 0,
     transition: {
       type: "spring",
-      bounce: 0.6,
+      bounce: 0.2,
       duration: 5,
       delay: 0,
     },
