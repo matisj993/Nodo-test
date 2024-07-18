@@ -31,7 +31,7 @@ export const HeaderComponent = () => {
           plataformas digitales pagas.
         </motion.p>
           <Link className={styles["button"]} href="#contacto">
-            CONTACTA CON NOSOTROS
+            CONTACTÁ CON NOSOTROS
           </Link>
       </motion.div>
     </div>

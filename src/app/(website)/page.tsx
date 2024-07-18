@@ -9,7 +9,7 @@ import { ComoLoHacemosComponent } from "@/components/ComoLoHacemos/ComoLoHacemos
 import { EquipoComponent } from "@/components/EquipoComponent/EquipoComponent";
 import { ClientesComponent } from "@/components/ClientesComponent/ClientesComponent";
 import { PartnersComponent } from "@/components/PartnersComponent/PartnersComponent";
-import { ContactComponent } from "@/components/ContactComponent/ContactComponent";
+import { ContactContainer } from "@/containers/ContactContainer/ContactContainer";
 
 export default function AppContainer() {
   return (
@@ -23,7 +23,7 @@ export default function AppContainer() {
       <HerramientasComponent/>
       <PublicidadComponent/>
       <EquipoComponent/>
-      <ContactComponent/>
+      <ContactContainer/>
       <PartnersComponent/>
     </div>
   );
