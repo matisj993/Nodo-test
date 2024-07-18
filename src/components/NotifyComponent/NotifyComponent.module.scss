@@ -16,7 +16,7 @@
     pointer-events: none;
 
     .notification-container {
-        height: 75px;
+        height: 40px;
         color: white;
         animation-name: fade-in-out;
         animation-duration: 5s;
@@ -30,7 +30,7 @@
         padding: 1rem 1.25rem;
         border-radius: 15px;
         border: 1px solid rgba(154, 152, 152, 1);
-        background-color: rgba(192, 15, 38, 1);
+        background-color: #3222e5;
         color: rgba(255, 255, 255, 1);
 
         .text {

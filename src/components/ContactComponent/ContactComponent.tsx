@@ -117,7 +117,7 @@ export const ContactComponent = ({
   };
 
   return (
-    <motion.div
+    <motion.section
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.2 }}
@@ -260,6 +260,6 @@ export const ContactComponent = ({
           </motion.p>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 };

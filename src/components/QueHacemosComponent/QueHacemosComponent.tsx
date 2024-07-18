@@ -86,7 +86,7 @@ export const QueHacemosComponent = () => {
   ];
 
   return (
-    <motion.div
+    <motion.section
     id="servicios"
       initial="offscreen"
       whileInView="onscreen"
@@ -121,6 +121,6 @@ export const QueHacemosComponent = () => {
           </motion.div>
         ))}
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 };

@@ -81,7 +81,7 @@
         bottom: -8px; 
         left: 0;
         width: 50%; 
-        height: 2px; 
+        height: 1px; 
         background-color: rgb(0, 0, 0); 
         transition: width 0.3s ease-in-out;
       }
@@ -96,5 +96,11 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 999; 
+  }
+
+  .active a {
+    color: #000000; 
+    text-decoration: underline;
+    text-underline-offset: 14px;
   }
 

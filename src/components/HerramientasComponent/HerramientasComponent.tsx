@@ -53,7 +53,7 @@ export const HerramientasComponent = () => {
     },
   ];
   return (
-    <div id="herramientas" className={styles["container"]}>
+    <section id="herramientas" className={styles["container"]}>
       <div className={styles["half-blue"]}>
         <div className={styles["text-container-left"]}>
         <p className={styles["section-title"]}>
@@ -85,6 +85,6 @@ export const HerramientasComponent = () => {
           ))}
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };

@@ -38,7 +38,7 @@ import { motion, Variants } from "framer-motion";
 
 export const EquipoComponent = () => {
   return (
-    <motion.div
+    <motion.section
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true, amount: 0.2 }}
@@ -62,6 +62,6 @@ export const EquipoComponent = () => {
           Medias, Analistas de Datos.
         </motion.p>
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 };
