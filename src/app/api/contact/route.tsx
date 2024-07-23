@@ -14,6 +14,15 @@ export interface FormRequestInterface {
 }
 
 export async function POST(req: Request, response: Response) {
+
+  const recipients = [
+    process.env.EMAIL_USERNAME,
+    process.env.EMAIL_USERNAME2,
+    process.env.EMAIL_USERNAME3,
+  ];
+
+  console.log(recipients)
+
   try {
     const body = (await req.json()) as FormRequestInterface;
     const contentHtml = template(body);
@@ -34,7 +43,7 @@ export async function POST(req: Request, response: Response) {
 
     const mailOptions = {
       from: `${process.env.EMAIL_USERNAME}`,
-      to: `${process.env.EMAIL_USERNAME}`,
+      to: recipients,
       subject: "NODO PAID MEDIA",
       html: contentHtml
     };
