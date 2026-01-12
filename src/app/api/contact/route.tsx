@@ -13,15 +13,13 @@ export interface FormRequestInterface {
   };
 }
 
-export async function POST(req: Request, response: Response) {
+export async function POST(req: Request) {
 
   const recipients = [
     process.env.EMAIL_USERNAME,
     process.env.EMAIL_USERNAME2,
     process.env.EMAIL_USERNAME3,
   ];
-
-  console.log(recipients)
 
   try {
     const body = (await req.json()) as FormRequestInterface;
@@ -48,13 +46,7 @@ export async function POST(req: Request, response: Response) {
       html: contentHtml
     };
 
-    transporter.sendMail(mailOptions, (error: any, info: any) => {
-      if (error) {
-        console.log("Error al enviar el mail", error);
-      } else {
-        console.log("Correo enviado", info);
-      }
-    });
+    await transporter.sendMail(mailOptions);
 
     return NextResponse.json(
       { message: "Message sent", status: 200 },
