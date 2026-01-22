@@ -2,7 +2,7 @@
 import { FooterComponent } from "@/components/FooterComponent/FooterComponent";
 import { NavbarComponent } from "@/components/NavbarComponent/NavbarComponent";
 import type { Metadata } from "next";
-import { montserrat } from "@/app/utils/font"
+import { albertSans, barlow } from "@/app/utils/font"
 import '@/app/utils/styles/global.css'
 
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
 
     <html>
-      <body className={montserrat.className}>
+      <body className={`${albertSans.variable} ${barlow.variable}`}>
       <NavbarComponent />
        {children}
       <FooterComponent />

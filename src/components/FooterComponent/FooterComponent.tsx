@@ -1,6 +1,8 @@
 "use client";
 import styles from "./FooterComponent.module.scss";
 import { motion, Variants } from "framer-motion";
+import { useBreakpoints } from "@/app/hooks/useBreakpoints";
+
 const textAnimation: Variants = {
   offscreen: {
     opacity: 0,
@@ -19,67 +21,129 @@ const textAnimation: Variants = {
 };
 
 export const FooterComponent = () => {
-  const redes = [
+  const { isMobile } = useBreakpoints();
+  const socialMedia = [
     {
-      src: "/img/INSTAGRAM.svg",
-      alt: "ig",
-      text: "@nodopaidmediasolutions",
+      svg:
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="29" viewBox="0 0 32 29" fill="none">
+          <path d="M3.73828 19.1341C3.73828 22.8616 6.74892 25.8852 10.4604 25.8852H19.813C23.5245 25.8852 26.5351 22.8616 26.5351 19.1341V9.74132C26.5351 6.01384 23.5245 2.99023 19.813 2.99023H10.4604C6.74892 2.99023 3.73828 6.01384 3.73828 9.74132V19.1341ZM21.2743 7.09959C22.0929 7.09959 22.7356 7.74512 22.7356 8.56722C22.7356 9.38933 22.0929 10.0349 21.2743 10.0349C20.4557 10.0349 19.813 9.38933 19.813 8.56722C19.813 7.74512 20.4557 7.09959 21.2743 7.09959ZM15.1367 8.86075C18.2055 8.86075 20.6898 11.3557 20.6898 14.4377C20.6898 17.5198 18.2055 20.0147 15.1367 20.0147C12.0679 20.0147 9.58362 17.5198 9.58362 14.4377C9.58362 11.3557 12.0679 8.86075 15.1367 8.86075Z" fill="#292734" />
+          <path d="M18.9359 14.4369C18.9359 16.5444 17.2348 18.2528 15.1364 18.2528C13.038 18.2528 11.3369 16.5444 11.3369 14.4369C11.3369 12.3295 13.038 10.6211 15.1364 10.6211C17.2348 10.6211 18.9359 12.3295 18.9359 14.4369Z" fill="#292734" />
+        </svg>,
+      alt: "Instagram",
       url: "https://www.instagram.com/nodopaidmediasolutions",
     },
     {
-      src: "/img/LINKEDIN.svg",
-      alt: "linkedin",
-      text: "Nodo Paid Media Solutions",
+      svg:
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="29" viewBox="0 0 32 29" fill="none">
+          <path d="M20.9346 9.85059C22.8684 9.85059 24.7226 10.613 26.0889 11.9688C27.455 13.3246 28.2217 15.1634 28.2217 17.0791V25.6055H24.1152V17.0791C24.1152 16.2396 23.7785 15.4351 23.1816 14.8428C22.585 14.2507 21.7765 13.9189 20.9346 13.9189C20.0927 13.919 19.2841 14.2507 18.6875 14.8428C18.0908 15.4351 17.7549 16.2396 17.7549 17.0791V25.6055H13.6475V17.0791C13.6475 15.1634 14.4141 13.3246 15.7803 11.9688C17.1465 10.6129 19.0007 9.85066 20.9346 9.85059ZM7.28809 11.1494V25.6055H3.18066V11.1494H7.28809ZM5.23438 2.05957C6.37229 2.05977 7.28784 2.97374 7.28809 4.09277C7.28809 5.21201 6.37244 6.12675 5.23438 6.12695C4.09614 6.12695 3.18066 5.21213 3.18066 4.09277C3.18091 2.97362 4.09629 2.05957 5.23438 2.05957Z" fill="#292734" stroke="#292734" stroke-width="1.12622" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>,
+      alt: "LinkedIn",
       url: "https://www.linkedin.com/company/nodopaidmediasolution",
     },
     {
-      src: "/img/FACEBOOK.svg",
-      alt: "fb",
-      text: "Nodo Paid Media Solutions",
+      svg:
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="29" viewBox="0 0 32 29" fill="none">
+          <g clip-path="url(#clip0_2539_416)">
+            <path d="M19.2158 1.2998H22.6455V5.72852H19.2158C18.7099 5.72855 18.2294 5.93845 17.8789 6.30371C17.5292 6.66821 17.3369 7.15803 17.3369 7.66406V11.6602C17.3371 12.0496 17.6525 12.365 18.042 12.3652H22.4971L21.4355 16.7939H18.042C17.6524 16.7941 17.3369 17.1103 17.3369 17.5V27.8594H13.1318V17.5C13.1318 17.1102 12.8156 16.7939 12.4258 16.7939H9.14941V12.3652H12.4258C12.8154 12.3652 13.1316 12.0498 13.1318 11.6602V7.66406C13.1318 5.96914 13.7782 4.3481 14.9219 3.15625C16.0648 1.9652 17.6097 1.29984 19.2158 1.2998Z" fill="#292734" stroke="#292734" stroke-width="1.10422" stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+          <defs>
+            <clipPath id="clip0_2539_416">
+              <rect width="31.4017" height="28.4111" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>,
+      alt: "Facebook",
       url: "https://www.facebook.com/NodoPaidMediaSolutions?_rdr",
     },
   ];
+
   return (
-    <motion.div
-      initial="offscreen"
-      whileInView="onscreen"
-      viewport={{ once: true, amount: 0.2 }}
-      
-      className={styles["hero"]}
+    <motion.footer
+      className={styles["footer"]}
     >
-      <motion.div variants={textAnimation}className={styles["info-container"]}>
-        <div className={styles["logo-container"]}>
-          <img
-            src="/img/nodoLogo.svg"
-            alt="Nodo Logo"
-            className={styles["logo"]}
-          />
+      <motion.div className={styles["footer-content"]}>
+        {/* Logo */}
+        <div className={styles["logo-section"]}>
+          {
+            isMobile
+              ?
+              <svg xmlns="http://www.w3.org/2000/svg" width="152" height="42" viewBox="0 0 152 42" fill="none">
+                <path d="M55.952 8.88867C47.0624 8.88867 39.8516 16.0935 39.8516 24.9891C39.8516 33.8847 47.0565 41.0895 55.952 41.0895C64.8476 41.0895 72.0524 33.8847 72.0524 24.9891C72.0524 16.0935 64.8476 8.88867 55.952 8.88867ZM55.952 34.9003C50.4797 34.9003 46.0408 30.4615 46.0408 24.9891C46.0408 19.5168 50.4797 15.0779 55.952 15.0779C61.4244 15.0779 65.8632 19.5168 65.8632 24.9891C65.8632 30.4615 61.4244 34.9003 55.952 34.9003Z" fill="white" />
+                <path d="M135.658 8.88867C126.768 8.88867 119.558 16.0935 119.558 24.9891C119.558 33.8847 126.762 41.0895 135.658 41.0895C144.554 41.0895 151.758 33.8847 151.758 24.9891C151.758 16.0935 144.554 8.88867 135.658 8.88867ZM135.658 34.9003C130.186 34.9003 125.747 30.4615 125.747 24.9891C125.747 19.5168 130.186 15.0779 135.658 15.0779C141.13 15.0779 145.569 19.5168 145.569 24.9891C145.569 30.4615 141.13 34.9003 135.658 34.9003Z" fill="white" />
+                <path d="M16.1004 8.88867C7.21081 8.88867 0 16.0935 0 24.9891V41.0895H6.18327V24.9891C6.18327 19.5168 10.6221 15.0779 16.0945 15.0779C21.5669 15.0779 26.0057 19.5168 26.0057 24.9891V41.0895H32.1889V24.9891C32.1889 16.0995 24.9841 8.88867 16.0885 8.88867H16.1004Z" fill="white" />
+                <path d="M105.716 0V12.3128C102.979 10.1681 99.5443 8.88361 95.8045 8.88361C86.9149 8.88361 79.7041 16.0885 79.7041 24.984C79.7041 33.8796 86.9089 41.0845 95.8045 41.0845C104.7 41.0845 111.905 33.8796 111.905 24.984V0H105.722H105.716ZM95.8045 34.8952C90.3321 34.8952 85.8933 30.4564 85.8933 24.984C85.8933 19.5117 90.3321 15.0729 95.8045 15.0729C101.277 15.0729 105.716 19.5117 105.716 24.984C105.716 30.4564 101.277 34.8952 95.8045 34.8952Z" fill="white" />
+              </svg>
+              :
+              <svg xmlns="http://www.w3.org/2000/svg" width="203" height="55" viewBox="0 0 203 55" fill="none">
+                <path d="M74.604 11.8516C62.7512 11.8516 53.1367 21.4581 53.1367 33.3188C53.1367 45.1796 62.7433 54.7861 74.604 54.7861C86.4648 54.7861 96.0712 45.1796 96.0712 33.3188C96.0712 21.4581 86.4648 11.8516 74.604 11.8516ZM74.604 46.5337C67.3075 46.5337 61.389 40.6153 61.389 33.3188C61.389 26.0223 67.3075 20.1039 74.604 20.1039C81.9005 20.1039 87.8189 26.0223 87.8189 33.3188C87.8189 40.6153 81.9005 46.5337 74.604 46.5337Z" fill="white" />
+                <path d="M180.877 11.8516C169.025 11.8516 159.41 21.4581 159.41 33.3188C159.41 45.1796 169.017 54.7861 180.877 54.7861C192.738 54.7861 202.345 45.1796 202.345 33.3188C202.345 21.4581 192.738 11.8516 180.877 11.8516ZM180.877 46.5337C173.581 46.5337 167.662 40.6153 167.662 33.3188C167.662 26.0223 173.581 20.1039 180.877 20.1039C188.174 20.1039 194.092 26.0223 194.092 33.3188C194.092 40.6153 188.174 46.5337 180.877 46.5337Z" fill="white" />
+                <path d="M21.4672 11.8516C9.61442 11.8516 0 21.4581 0 33.3188V54.7861H8.24436V33.3188C8.24436 26.0223 14.1629 20.1039 21.4593 20.1039C28.7558 20.1039 34.6742 26.0223 34.6742 33.3188V54.7861H42.9186V33.3188C42.9186 21.466 33.3121 11.8516 21.4514 11.8516H21.4672Z" fill="white" />
+                <path d="M140.956 0V16.417C137.307 13.5574 132.727 11.8448 127.741 11.8448C115.888 11.8448 106.273 21.4513 106.273 33.3121C106.273 45.1728 115.88 54.7793 127.741 54.7793C139.601 54.7793 149.208 45.1728 149.208 33.3121V0H140.963H140.956ZM127.741 46.527C120.444 46.527 114.526 40.6085 114.526 33.3121C114.526 26.0156 120.444 20.0971 127.741 20.0971C135.037 20.0971 140.956 26.0156 140.956 33.3121C140.956 40.6085 135.037 46.527 127.741 46.527Z" fill="white" />
+              </svg>
+
+          }
         </div>
-        <div className={styles["text-container"]}>
-          <h2 className={styles["title"]}>
-            Nodo transforma objetivos en resultados.
-          </h2>
+
+        {/* Contact Info */}
+        <div className={styles["contact-section"]}>
+          <div className={styles["contact-item"]}>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={styles["icon-location"]}
+            >
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                fill="currentColor"
+              />
+            </svg>
+            <p className={styles["contact-text"]}>
+              Avenida Sagrada Familia 1488, Córdoba, Argentina.
+            </p>
+          </div>
+          <div className={styles["contact-item"]}>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={styles["icon-phone"]}
+            >
+              <path
+                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                fill="currentColor"
+              />
+            </svg>
+            <p className={styles["contact-text"]}>+54 351 4422929</p>
+          </div>
         </div>
-        <div className={styles["info-contacto"]}>
-          <p className={styles["text"]}>
-            Avenida Sagrada Familia 1488, Córdoba, Argentina.
-          </p>
-          <p className={styles["text"]}>+54 351 4422929</p>
-          <p className={styles["text"]}>www.nodomedia.com.ar</p>
-        </div>
-        <div className={styles["socialmedia-container"]}>
-          {redes.map((red, index) => (
-            <a href={red.url} key={index} className={styles["red-container"]}>
-              <div className={styles["icon-container"]}>
-                <img className={styles["icon"]} src={red.src} alt={red.alt} />
-              </div>
-              <div className={styles["social-text-container"]}>
-                <p className={styles["text"]}>{red.text}</p>
-              </div>
+
+        {/* Social Media */}
+        <div className={styles["social-section"]}>
+          {socialMedia.map((social, index) => (
+            <a
+              href={social.url}
+              key={index}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles["social-link"]}
+            >
+              {social.svg}
             </a>
           ))}
         </div>
       </motion.div>
-    </motion.div>
+
+      {/* Copyright */}
+      <div className={styles["copyright"]}>
+        <p className={styles["copyright-text"]}>
+          © Copyright 2026 | Todos los derechos reservados. Diseñado y desarrollado por 25Watts
+        </p>
+      </div>
+    </motion.footer>
   );
 };

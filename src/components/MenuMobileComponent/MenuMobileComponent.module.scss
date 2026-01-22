@@ -1,106 +1,126 @@
+.container-nav-mobile {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4632.35256rem;
+  background: rgba(0, 7, 56, 0.81);
+  backdrop-filter: blur(17.417644500732422px);
+  padding: 1.8125rem 2.4125rem 1.7265rem 2.1875rem;
+  margin: 1rem;
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    background: #000738;
+    z-index: -10;
+    transition: 0.2s all;
+    pointer-events: none;
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+
+  &.active {
+    &::before {
+      border-radius: 0%;
+      width: 1800px;
+      height: 1800px;
+      left: 0%;
+      top: -20%;
+      opacity: 1;
+    }
+
+    .navContainer {
+      opacity: 1;
+      pointer-events: all;
+      transition-delay: 0.2s;
+      height: 100%;
+      margin-top: 5.25rem;
+    }
+  }
+
+  .navContainer {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    margin-top: 0;
+  }
+}
 .iconMenuContainer {
-    cursor: pointer;
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    display: flex;
+  cursor: pointer;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  border-radius: 9.56844rem;
+  background: var(--Secundario-0, #5edeff);
+  padding: .7rem;
 
-    @media (min-width:768px) {
-        display: none;
-    }
+  @media (min-width: 768px) {
+    display: none;
   }
-  
-  .menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 80%; 
-    max-width: 300px; 
-    height: 100%;
-    background-color: #ffffff;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    z-index: 1000; 
-    overflow-x: hidden; 
-  }
-  
-  .menuOpen {
-    transform: translateX(10%); 
-  }
-  
-  .menuHeader {
-    width: 100%;
-    background: linear-gradient(90deg, #6845FD 0%, #5142ED 26%, #183BC5 79%, #0038B5 100%);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .closeIconContainer {
-    cursor: pointer;
-    margin-right: 3rem;
-  }
-  
-  .navigationContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    padding-right: 10rem;
-    gap: 3rem;
-  
-  }
+}
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 1000;
+  overflow-x: hidden;
+}
 
-  .navList{
-    list-style: none;
-    gap: 2rem;
-  }
+.menuOpen {
+  transform: translateX(10%);
+}
 
-  .navItem {
-    margin-bottom: 2rem;
-  
-    a {
-      color: rgb(0, 0, 0);
-      text-decoration: none;
-      font-size: 0.8rem;
-      position: relative; 
-  
-      &:hover {
-        text-decoration: none;
-      }
-  
-      &:hover::after {
-        content: '';
-        position: absolute;
-        bottom: -8px; 
-        left: 0;
-        width: 50%; 
-        height: 1px; 
-        background-color: rgb(0, 0, 0); 
-        transition: width 0.3s ease-in-out;
-      }
-    }
-  }
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 999; 
-  }
+.closeIconContainer {
+  cursor: pointer;
+  margin-right: 3rem;
+}
 
-  .active a {
-    color: #000000; 
-    text-decoration: underline;
-    text-underline-offset: 14px;
-  }
+.navigationContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-right: 10rem;
+  gap: 3rem;
+}
 
+.navList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3.62rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    position: relative;
+  }
+}
+
+.buttonContact {
+  display: flex;
+  width: 16.815rem;
+  height: 3.5625rem;
+  padding: 1.04638rem 1.56956rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

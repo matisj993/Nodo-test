@@ -1,10 +1,14 @@
-import { Montserrat } from 'next/font/google'
+import { Albert_Sans, Barlow } from 'next/font/google'
 
-export const montserrat = Montserrat({
+export const albertSans = Albert_Sans({
     subsets: ['latin'],
-    weight: ['500', '700'],
-    style: 'normal',
-    preload: true,
-    variable: '--tecnocampo-font',
-    display: 'swap'
+    variable: '--font-albert',
+    display: 'swap',
+})
+
+export const barlow = Barlow({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    variable: '--font-barlow',
+    display: 'swap',
 })

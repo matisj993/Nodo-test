@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, KeyboardEvent, useEffect, useState } from "reac
 import styles from "./ContactComponent.module.scss";
 import { motion, Variants } from "framer-motion";
 import NotifyComponent from "../NotifyComponent/NotifyComponent";
+import { useBreakpoints } from '@/app/hooks/useBreakpoints';
 
 const textVariants: Variants = {
   offscreen: {
@@ -22,23 +23,6 @@ const textVariants: Variants = {
   },
 };
 
-const infoAnimation: Variants = {
-  offscreen: {
-    opacity: 1,
-    y: -80,
-  },
-  onscreen: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      bounce: 0.2,
-      duration: 1.3,
-      delay: 0.5,
-    },
-  },
-};
-
 export const ContactComponent = ({
   handleSubmit,
   notification,
@@ -51,12 +35,12 @@ export const ContactComponent = ({
     isOpen: boolean;
   };
 }) => {
+  const { isDesktop } = useBreakpoints();
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
     email: '',
     phone: '',
-    city: '',
     message: '',
   });
   const [errors, setErrors] = useState({
@@ -89,7 +73,7 @@ export const ContactComponent = ({
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const { name } = e.currentTarget;
 
-    if (name === 'name' || name === 'lastName' || name === 'city') {
+    if (name === 'name' || name === 'lastName') {
       if (!/^[a-zA-Z\s]*$/.test(e.key)) {
         e.preventDefault();
       }
@@ -117,149 +101,237 @@ export const ContactComponent = ({
   };
 
   return (
-    <motion.section
-      initial="offscreen"
-      whileInView="onscreen"
-      viewport={{ once: true, amount: 0.2 }}
-      id="contacto"
-      className={styles["container"]}
-    >
-      <motion.div
+   <div className={styles["container-contact"]} id="contacto">
+      <motion.section
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
-        className={styles["half-blue"]}
+        id="contacto"
+        className={styles["SubContainer"]}
       >
-        <motion.form
-          onSubmit={handleFormSubmit}
-          encType="multipart/form-data"
-          variants={textVariants}
-          className={styles["form-container"]}
+        {/* Left Side - Animated Circle and Title */}
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.2 }}
+          className={styles["half-left"]}
         >
-          <p className={styles["required-text"]}>*Todos los campos son requeridos</p>
-          
-          <div className={styles["input-row"]}>
-            <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
-              <label className={styles["label"]} htmlFor="name">
-                Nombre:
+          <div className={styles["text-container-left"]}>
+            <div className={styles["svg-container"]}>
+              <svg
+                width={isDesktop ? "650" : "400"}
+                height={isDesktop ? "650" : "400"}
+                viewBox="0 0 650 650"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Círculo azul - carga inicial y luego oscilación lenta */}
+                <motion.g
+                  style={{ originX: "325px", originY: "325px" }}
+                  initial={{ rotate: -90 }}
+                  whileInView={{
+                    rotate: [-90, -45, -135, -90],
+                    transition: {
+                      delay: 2,
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
+                  }}
+                  viewport={{ once: true }}
+                >
+                  <motion.circle
+                    cx="325"
+                    cy="325"
+                    r="260"
+                    stroke="url(#paint0_linear_contact)"
+                    strokeWidth="40"
+                    opacity="1"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 0.75 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 2, ease: "easeInOut" }}
+                    style={{ originX: "325px", originY: "325px" }}
+                  />
+                  {/* Punto del círculo azul - aparece con el trazo */}
+                  <motion.g
+                    initial={{ rotate: 0, opacity: 0 }}
+                    whileInView={{ rotate: 270, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 2, ease: "easeInOut" }}
+                    style={{ originX: "325px", originY: "325px" }}
+                  >
+                    <circle cx="585" cy="310" r="25" fill="#00C2FF" />
+                  </motion.g>
+                </motion.g>
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_contact"
+                    x1="325"
+                    y1="65"
+                    x2="325"
+                    y2="585"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stopColor="#00C2FF" />
+                    <stop offset="1" stopColor="#00C2FF" stopOpacity="0.2" />
+                  </linearGradient>
+                </defs>
+
+                {/* Círculo blanco - oscilación lenta */}
+                <motion.g
+                  style={{ originX: "325px", originY: "325px" }}
+                  initial={{ rotate: -90 }}
+                  whileInView={{
+                    rotate: [-90, -80, -100, -90],
+                    transition: {
+                      delay: 2.5,
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
+                  }}
+                  viewport={{ once: true }}
+                >
+                  <motion.circle
+                    cx="325"
+                    cy="325"
+                    r="300"
+                    stroke="white"
+                    strokeWidth="2"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 0.7 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 2.5, ease: "easeInOut" }}
+                    style={{ originX: "325px", originY: "325px" }}
+                  />
+                  {/* Punto blanco en la punta del círculo - calculado correctamente */}
+                  <motion.circle
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 2, delay: 2.5 }}
+                    cx="230"
+                    cy="40"
+                    r="5"
+                    fill="white"
+                  />
+                </motion.g>
+              </svg>
+            </div>
+
+            <motion.h2 variants={textVariants} className={styles["title"]}>
+              Contacta con<br />
+              <span className={styles["title-white"]}>nosotros</span>
+            </motion.h2>
+          </div>
+        </motion.div>
+
+        {/* Right Side - Form */}
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.2 }}
+          className={styles["half-right"]}
+        >
+          <motion.form
+            onSubmit={handleFormSubmit}
+            encType="multipart/form-data"
+            variants={textVariants}
+            className={styles["form-container"]}
+          >
+            <div className={styles["input-row"]}>
+              <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
+                <label className={styles["label"]} htmlFor="name">
+                  Nombre*
+                </label>
+                <input
+                  placeholder="Escribí tu nombre"
+                  className={styles["input"]}
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
+              <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
+                <label className={styles["label"]} htmlFor="lastName">
+                  Apellido*
+                </label>
+                <input
+                  placeholder="Escribí tu apellido"
+                  className={styles["input"]}
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
+            </div>
+
+            <div className={styles["input-row"]}>
+              <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
+                <label className={styles["label"]} htmlFor="email">
+                  Correo electrónico*
+                </label>
+                <input
+                  placeholder="Ej: ejemplo@gmail.com"
+                  className={styles["input"]}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                {errors.email && <span className={styles["error"]}>{errors.email}</span>}
+              </div>
+              <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
+                <label className={styles["label"]} htmlFor="phone">
+                  Teléfono*
+                </label>
+                <input
+                  placeholder="Ej: 3514329365"
+                  className={styles["input"]}
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                />
+                {errors.phone && <span className={styles["error"]}>{errors.phone}</span>}
+              </div>
+            </div>
+
+            <div className={styles["input-container"]}>
+              <label className={styles["label"]} htmlFor="message">
+                Mensaje*
               </label>
-              <input
-                placeholder="Ej: Marisa"
-                className={styles["input"]}
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+              <textarea
+                className={styles["input-text-area"]}
+                id="message"
+                name="message"
+                rows={4}
+                placeholder="Escribí acá por qué te interesa contactarnos."
+                value={formData.message}
                 onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
               />
             </div>
-            <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
-              <label className={styles["label"]} htmlFor="lastName">
-                Apellido:
-              </label>
-              <input
-                placeholder="Ej: López"
-                className={styles["input"]}
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
-              />
-            </div>
-          </div>
 
-          <div className={styles["input-row"]}>
-            <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
-              <label className={styles["label"]} htmlFor="email">
-                Email:
-              </label>
-              <input
-                placeholder="Ej: ejemplo@ejemplo.com"
-                className={styles["input"]}
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-              {errors.email && <span className={styles["error"]}>{errors.email}</span>}
-            </div>
-            <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
-              <label className={styles["label"]} htmlFor="phone">
-                Teléfono:
-              </label>
-              <input
-                placeholder="Ej: 1158774678"
-                className={styles["input"]}
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
-              />
-              {errors.phone && <span className={styles["error"]}>{errors.phone}</span>}
-            </div>
-          </div>
-
-          <div className={styles["input-container"]}>
-            <label className={styles["label"]} htmlFor="city">
-              Ciudad:
-            </label>
-            <input
-              placeholder="Ej: Córdoba"
-              className={styles["input"]}
-              type="text"
-              id="city"
-              name="city"
-              value={formData.city}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
-
-          <div className={styles["input-container"]}>
-            <label className={styles["label"]} htmlFor="message">
-              Mensaje:
-            </label>
-            <textarea
-              className={styles["input-text-area"]}
-              id="message"
-              name="message"
-              rows={4}
-              value={formData.message}
-              onChange={handleInputChange}
-            />
-          </div>
-          
-          <button disabled={isButtonDisabled} className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : ""}`} type="submit">
-            ENVIAR
-          </button>
-        </motion.form>
-        <NotifyComponent notification={notification} />
-      </motion.div>
-
-      <motion.div
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.2 }}
-        className={styles["half-white"]}
-      >
-        <div className={styles["text-container-left"]}>
-          <motion.p variants={textVariants} className={styles["section-title"]}>
-            CONTACTO
-          </motion.p>
-          <motion.h2 variants={textVariants} className={styles["title"]}>
-            ¡Contactate con nosotros!
-          </motion.h2>
-          <motion.p variants={textVariants} className={styles["subtitle"]}>
-            Buscamos juntos la mejor estrategia para vos.
-          </motion.p>
-        </div>
-      </motion.div>
-    </motion.section>
+            <button
+              disabled={isButtonDisabled}
+              className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : ""}`}
+              type="submit"
+            >
+              Enviar mensaje
+            </button>
+          </motion.form>
+          <NotifyComponent notification={notification} />
+        </motion.div>
+      </motion.section>
+   </div>
   );
 };
