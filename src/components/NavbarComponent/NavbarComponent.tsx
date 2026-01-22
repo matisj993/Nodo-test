@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import styles from "./NavbarComponent.module.scss";
 import MenuMobile from "../MenuMobileComponent/MenuMobileComponent";
+import { LogoMobile, LogoNavbar } from "./iconsNavBar";
+import CustomButton from "../reusableComponent/CustomButton/CustomButton";
+
 
 export const NavbarComponent = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -37,26 +40,59 @@ export const NavbarComponent = () => {
 
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
-      <div className={`${styles.logo} ${scrolled ? styles.logoVisible : ""}`}>
-        <img src="/img/isoNegativo.svg" alt="Logo" />
+      <div className={styles["navbar-content"]}>
+        <div className={`${styles.logo} ${scrolled ? styles.logoVisible : ""}`}>
+          <LogoNavbar />
+        </div>
+        <ul className={styles.navList}>
+          <li className={styles.navItem}>
+            <a
+              className={`${styles.navLink} ${activeSection === "servicios" ? styles.navLinkActive : ""}`}
+              href="#servicios"
+              onClick={() => setActiveSection("servicios")}
+            >
+              Servicios
+            </a>
+          </li>
+          <li className={styles.navItem}>
+            <a
+              className={`${styles.navLink} ${activeSection === "herramientas" ? styles.navLinkActive : ""}`}
+              href="#herramientas"
+              onClick={() => setActiveSection("Enfoque")}
+            >
+              Enfoque
+            </a>
+          </li>
+          <li className={styles.navItem}>
+            <a
+              className={`${styles.navLink} ${activeSection === "Clientes" ? styles.navLinkActive : ""}`}
+              href="#Clientes"
+              onClick={() => setActiveSection("Clientes")}
+            >
+              Clientes
+            </a>
+          </li>
+          <li className={styles.navItem}>
+            <a
+              className={`${styles.navLink} ${activeSection === "Nosotros" ? styles.navLinkActive : ""}`}
+              href="#Nosotros"
+              onClick={() => setActiveSection("Nosotros")}
+            >
+              Nosotros
+            </a>
+          </li>
+        </ul>
+        <div className={styles["navbar-button"]}>
+          <CustomButton variant="principal" onClick={() => setActiveSection("contacto")}>
+            Contactanos
+          </CustomButton>
+        </div>
+        <div className={styles["header-menu"]}>
+          <MenuMobile
+           />
+        </div>
       </div>
-      <ul className={styles.navList}>
-        <li className={`${styles.navItem} ${activeSection === "servicios" ? styles.active : ""}`}>
-          <a href="#servicios">SERVICIOS</a>
-        </li>
-        <li className={`${styles.navItem} ${activeSection === "herramientas" ? styles.active : ""}`}>
-          <a href="#herramientas">HERRAMIENTAS</a>
-        </li>
-        <li className={`${styles.navItem} ${activeSection === "nosotros" ? styles.active : ""}`}>
-          <a href="#nosotros">NOSOTROS</a>
-        </li>
-        <li className={`${styles.navItem} ${activeSection === "contacto" ? styles.active : ""}`}>
-          <a href="#contacto">CONTACTO</a>
-        </li>
-      </ul>
-      <div className={styles["header-menu"]}>
-        <MenuMobile />
-      </div>
+      
     </nav>
   );
 };

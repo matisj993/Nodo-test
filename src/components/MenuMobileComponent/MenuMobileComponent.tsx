@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import styles from "./MenuMobileComponent.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { LogoMobile } from "../NavbarComponent/iconsNavBar";
+import CustomButton from "../reusableComponent/CustomButton/CustomButton";
+import { IconClose, IconHamburger } from "./IconsMenuMobile";
 
 export default function MenuMobile() {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -38,7 +41,7 @@ export default function MenuMobile() {
 
   useEffect(() => {
     setOpenMenu(false);
-  }, []); 
+  }, []);
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
@@ -49,38 +52,37 @@ export default function MenuMobile() {
   };
 
   return (
-    <div>
-      {openMenu && (
-        <div className={styles.overlay} onClick={closeMenu}></div>
-      )}
-
-      <div className={styles.iconMenuContainer} onClick={toggleMenu}>
-        <Image src="/img/iconMenu.svg" alt="icon" loading="lazy" width={25} height={25}/>
-      </div>
-      <div className={`${styles.menu} ${openMenu ? styles.menuOpen : ""}`}>
-        <div className={styles.menuHeader}>
-          <div className={styles.closeIconContainer} onClick={closeMenu}>
-            <Image width={15} height={15} src="/img/closeMenu.svg" alt="close" loading="lazy"/>
-          </div>
+    <div className={`${styles["container-nav-mobile"]} ${openMenu && styles.active}`}>
+      <div className={styles["menu-header"]}>
+        <LogoMobile />
+        <div className={styles.iconMenuContainer} onClick={toggleMenu}>
+          {openMenu ? <IconClose /> : <IconHamburger />}
         </div>
-        <nav className={styles.navigationContainer}>
-        <ul className={styles.navList}>
-        <li className={`${styles.navItem} ${activeSection === "servicios" ? styles.active : ""}`}>
-          <a href="#servicios">SERVICIOS</a>
-        </li>
-        <li className={`${styles.navItem} ${activeSection === "herramientas" ? styles.active : ""}`}>
-          <a href="#herramientas">HERRAMIENTAS</a>
-        </li>
-        <li className={`${styles.navItem} ${activeSection === "nosotros" ? styles.active : ""}`}>
-          <a href="#nosotros">NOSOTROS</a>
-        </li>
-        <li className={`${styles.navItem} ${activeSection === "contacto" ? styles.active : ""}`}>
-          <a href="#contacto">CONTACTO</a>
-        </li>
-      </ul>
-        </nav>
 
       </div>
+      <nav className={styles.navContainer}>
+        <ul className={styles.navList} >
+          <li className={`${styles.navItem} ${activeSection === "servicios" ? styles.active : ""}`}>
+            <a href="#servicios" onClick={closeMenu}>SERVICIOS</a>
+          </li>
+          <li className={`${styles.navItem} ${activeSection === "herramientas" ? styles.active : ""}`}>
+            <a href="#herramientas" onClick={closeMenu}>ENFOQUE</a>
+          </li>
+          <li className={`${styles.navItem} ${activeSection === "clientes" ? styles.active : ""}`}>
+            <a href="#Clientes" onClick={closeMenu}>CLIENTES</a>
+          </li>
+          <li className={`${styles.navItem} ${activeSection === "nosotros" ? styles.active : ""}`}>
+            <a href="#nosotros" onClick={closeMenu}>NOSOTROS</a>
+          </li>
+          <li className={`${styles.navItem} ${activeSection === "contacto" ? styles.active : ""}`}>
+            <CustomButton className={styles.buttonContact} variant="principal" onClick={() => { closeMenu(); }}>
+              Contactanos
+            </CustomButton>
+          </li>
+        </ul>
+      </nav>
+
+
     </div>
   );
 }

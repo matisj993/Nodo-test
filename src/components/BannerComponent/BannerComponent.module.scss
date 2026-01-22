@@ -1,0 +1,222 @@
+.hero-container{
+  width: 100%;
+  background-image: url("/img/BannerComponent/BannerHome.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  @media (max-width: 768px) {
+    width: revert;
+    padding: 0 1.5rem;
+    background-image: url("/img/BannerComponent/bannerMobile.png");
+  }
+}
+.hero {
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: start;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    width: revert;
+    padding: 0 1.5rem;
+  }
+}
+.heroTop {
+  height: 10%;
+}
+.heroBottom {
+  display: flex;
+  margin-bottom: 5rem;
+  gap: 1.81rem;
+  padding-left: 10rem;
+  @media (max-width: 1200px) {
+    padding-left: 6rem;
+  }
+  .heroBottomText {
+    color: #fff;
+  }
+  .heroBottomText:first-child {
+    display: flex;
+    align-items: baseline;
+    &::before {
+      content: "";
+      width: 3rem;
+      height: 10px;
+      background: linear-gradient(90deg, #00d1ff 0%, rgba(0, 209, 255, 0) 100%);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-bottom: 1.5rem;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding-left: 0rem;
+    margin-bottom: 0;
+  }
+}
+
+.heroBottomMobile {
+  display: flex;
+  flex-direction: column;
+  .heroBottomText {
+    color: #fff;
+  }
+  @media screen and (max-width: 768px) {
+    padding-left: 0rem;
+    margin-bottom: 0;
+  }
+}
+.heroBottomMobile .heroTopContent {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  gap: 1.14rem;
+  align-items: center;
+  .heroBottomText:first-child {
+    display: flex;
+    align-items: end;
+    &::before {
+      content: "";
+      width: 2rem;
+      height: 5px;
+      background: linear-gradient(90deg, #00d1ff 0%, rgba(0, 209, 255, 0) 100%);
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+  }
+}
+.HeroContentBottom {
+  width: 100%;
+}
+.heroBottomMobile .heroBottomContent {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  gap: 1.14rem;
+  align-items: center;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding-left: 10rem;
+  @media (max-width: 1200px) {
+    padding-left: 6rem;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    padding-left: 0rem;
+  }
+}
+
+.logo {
+  width: 30rem;
+  height: 15rem;
+
+  @media (max-width: 768px) {
+    width: 15rem;
+    height: 9rem;
+  }
+}
+.textBlue {
+  color: var(--Secundario-0, #5edeff);
+  font-size: clamp(2.44688rem, 2.0547rem + 1.6731vw, 4.0625rem);
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin: 0;
+}
+
+.subtitle {
+  color: #fff;
+  font-size: clamp(2.44688rem, 1.7817rem + 2.8382vw, 5.1875rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+
+  @media (max-width: 768px) {
+  }
+}
+.subtitleBefore {
+  color: #fff;
+  font-size: clamp(2.44688rem, 1.7817rem + 2.8382vw, 5.1875rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+
+  display: flex;
+  align-items: end;
+  gap: 20px;
+  @media screen and (max-width: 768px) {
+    align-items: start;
+    gap: 10px;
+  }
+
+  &::before {
+    content: "";
+    width: 40px;
+    height: 12px;
+    background-color: #00d1ff;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-bottom: 1.5rem;
+    @media screen and (max-width: 768px) {
+      margin-top: 2.9rem;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.banner-button-container {
+  display: flex;
+  gap: 2.12rem;
+  margin-top: 3.12rem;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    gap: 1.22rem;
+  }
+}
+
+.button {
+  margin-top: 2rem;
+  margin-left: 1rem;
+  border-radius: 2rem;
+  color: #0041b8;
+  background: white;
+  box-shadow: 0px 4px 8px 0px rgba(21, 21, 21, 0.1);
+  display: flex;
+  width: 18.375rem;
+  height: 3rem;
+  font-weight: 600;
+  padding: 0.1rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  &:hover {
+    background-color: #b7b8ff;
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 4px 8px 0px rgba(19, 18, 18, 0.336);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    width: 13rem;
+    height: 2.5rem;
+    padding: 0.1rem 0.5rem;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+}
