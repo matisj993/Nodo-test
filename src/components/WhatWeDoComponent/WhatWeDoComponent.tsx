@@ -29,7 +29,7 @@ const textAnimation: Variants = {
 export const WhatWeDoComponent = () => {
   const { isMobile } = useBreakpoints();
   return (
-    <div className={styles['container-section-about']}>
+    <div className={styles['container-section-about']} id="WhatWeDoComponent">
       <div className={styles['left-text-about']}>
         <div className={styles['top-text-about-title']}>
           <h2 className={styles['text-blue']}>Qué</h2>

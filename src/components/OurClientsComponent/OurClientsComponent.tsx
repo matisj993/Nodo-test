@@ -19,7 +19,7 @@ export const OurClientsComponent = () => {
     ];
 
     return (
-        <section className={styles["section-clients"]} id="Clientes">
+        <section className={styles["section-clients"]} id="OurClientsComponent">
             <div className={styles["container-clients"]}>
                 {/* Left Side - Title and Description */}
                 <motion.div

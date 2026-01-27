@@ -11,7 +11,7 @@ export const OurApproachComponent = () => {
     ];
 
     return (
-        <section className={styles["section-approach"]}>
+        <section className={styles["section-approach"]} id="OurApproachComponent">
             <div className={styles["container-approach"]}>
                 {/* Left Side - Image with circular frame */}
                 <motion.div

@@ -8,7 +8,7 @@ export const WeMakeDifferentComponent = () => {
   const { isMobile } = useBreakpoints();
 
   return (
-    <section className={styles["section-different"]}>
+    <section className={styles["section-different"]} id="WeMakeDifferentComponent">
       <div className={styles["container-different"]}>
         {/* Left Side - Circles */}
         <div className={styles["circles-container"]}>

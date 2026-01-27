@@ -136,10 +136,13 @@
 }
 
 .circle-text {
-  font-size: 1rem;
+  font-size: 1.3rem;
   line-height: 1.4;
   color: #333;
   margin: 0;
+  @media screen and (max-width: 1200px) {
+   font-size: 1rem;
+  }
 }
 
 /* Right Content Section */
@@ -194,5 +197,5 @@
 
 .bold-blue {
   font-weight: 700;
-  color: #5edeff;
+  color: #00BFE0;
 }

@@ -42,13 +42,15 @@ export const NavbarComponent = () => {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles["navbar-content"]}>
         <div className={`${styles.logo} ${scrolled ? styles.logoVisible : ""}`}>
+          <a href="#bannerHero">
           <LogoNavbar />
+          </a>
         </div>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
             <a
               className={`${styles.navLink} ${activeSection === "servicios" ? styles.navLinkActive : ""}`}
-              href="#servicios"
+              href="#WhatWeDoComponent"
               onClick={() => setActiveSection("servicios")}
             >
               Servicios
@@ -57,7 +59,7 @@ export const NavbarComponent = () => {
           <li className={styles.navItem}>
             <a
               className={`${styles.navLink} ${activeSection === "herramientas" ? styles.navLinkActive : ""}`}
-              href="#herramientas"
+              href="#OurApproachComponent"
               onClick={() => setActiveSection("Enfoque")}
             >
               Enfoque
@@ -66,7 +68,7 @@ export const NavbarComponent = () => {
           <li className={styles.navItem}>
             <a
               className={`${styles.navLink} ${activeSection === "Clientes" ? styles.navLinkActive : ""}`}
-              href="#Clientes"
+              href="#OurClientsComponent"
               onClick={() => setActiveSection("Clientes")}
             >
               Clientes
@@ -75,7 +77,7 @@ export const NavbarComponent = () => {
           <li className={styles.navItem}>
             <a
               className={`${styles.navLink} ${activeSection === "Nosotros" ? styles.navLinkActive : ""}`}
-              href="#Nosotros"
+              href="#WeMakeDifferentComponent"
               onClick={() => setActiveSection("Nosotros")}
             >
               Nosotros
@@ -83,7 +85,13 @@ export const NavbarComponent = () => {
           </li>
         </ul>
         <div className={styles["navbar-button"]}>
-          <CustomButton variant="principal" onClick={() => setActiveSection("contacto")}>
+          <CustomButton
+            variant="principal"
+            onClick={() => {
+              setActiveSection("ContactComponent");
+              window.location.href = "#ContactComponent";
+            }}
+          >
             Contactanos
           </CustomButton>
         </div>

@@ -36,14 +36,13 @@
 /* Left Side - Image */
 .image-container {
   position: relative;
-  max-width: 40%;
+  max-width: 50%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
   @media (max-width: 1024px) {
-    max-width: 400px;
   }
 
   @media (max-width: 768px) {
@@ -97,9 +96,13 @@
   height: 100%;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: start;
+   @media screen and (max-width: 1681px){
+     justify-content: end;
+   }
   img{
-    width: 100%;
-    height: auto;
     object-fit: cover; // Asegura que se vea completa
     object-position: left; // La imagen se queda pegada a la izquierda del div
    @media screen and (max-width: 640px){
@@ -200,7 +203,7 @@
 
 .bold-blue {
   font-weight: 700;
-  color: #5edeff;
+  color: #00BFE0;
 }
 
 /* Platform Badges */
@@ -223,7 +226,7 @@
   padding: 0.625rem 1.5rem;
   border: 1px solid #5edeff;
   border-radius: 50px;
-  font-size: 0.9375rem;
+  font-size: 1.08938rem;
   color: #333;
   background-color: transparent;
   transition: all 0.3s ease;

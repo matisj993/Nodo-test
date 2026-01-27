@@ -27,8 +27,10 @@ export const ContactContainer = () => {
           const city = formData.get('city') as string;
           const phone = formData.get('phone') as string;
           const message = formData.get('message') as string;
+          const recaptchaToken = formData.get('recaptchaToken') as string;
           await submitForm({
-            formData: { name, lastName, city, email, message, phone}
+            formData: { name, lastName, city, email, message, phone},
+            recaptchaToken
           });
 
         } catch (error) {
@@ -38,7 +40,8 @@ export const ContactContainer = () => {
     });
 
     const submitForm = async ({
-        formData
+        formData,
+        recaptchaToken
       }: {
         formData: {
           name: string,
@@ -47,14 +50,15 @@ export const ContactContainer = () => {
           city: string,
           phone: string,
           message: string,
-        }
+        },
+        recaptchaToken: string
       }) => {
           const response = await fetch(`${window.location.origin}/api/contact`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ formData })
+            body: JSON.stringify({ formData, recaptchaToken })
           });
     
           const respuesta = await response.json();
