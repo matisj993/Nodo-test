@@ -19,11 +19,11 @@ export const NavbarComponent = () => {
         setScrolled(false);
       }
 
-      const sections = document.querySelectorAll("section, div[id]");
+      const sections = document.querySelectorAll("section");
       sections.forEach((sec) => {
         const top = window.scrollY;
-        const offset = (sec as HTMLElement).offsetTop - 200;
-        const height = (sec as HTMLElement).offsetHeight;
+        const offset = sec.offsetTop - 150;
+        const height = sec.offsetHeight;
         const id = sec.getAttribute("id");
 
         if (top >= offset && top < offset + height) {
@@ -42,56 +42,48 @@ export const NavbarComponent = () => {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles["navbar-content"]}>
         <div className={`${styles.logo} ${scrolled ? styles.logoVisible : ""}`}>
-          <a href="#bannerHero">
           <LogoNavbar />
-          </a>
         </div>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
             <a
-              className={`${styles.navLink} ${activeSection === "WhatWeDoComponent" ? styles.navLinkActive : ""}`}
-              href="#WhatWeDoComponent"
-              onClick={() => setActiveSection("WhatWeDoComponent")}
+              className={`${styles.navLink} ${activeSection === "servicios" ? styles.navLinkActive : ""}`}
+              href="#servicios"
+              onClick={() => setActiveSection("servicios")}
             >
               Servicios
             </a>
           </li>
           <li className={styles.navItem}>
             <a
-              className={`${styles.navLink} ${activeSection === "OurApproachComponent" ? styles.navLinkActive : ""}`}
-              href="#OurApproachComponent"
-              onClick={() => setActiveSection("OurApproachComponent")}
+              className={`${styles.navLink} ${activeSection === "herramientas" ? styles.navLinkActive : ""}`}
+              href="#herramientas"
+              onClick={() => setActiveSection("Enfoque")}
             >
               Enfoque
             </a>
           </li>
           <li className={styles.navItem}>
             <a
-              className={`${styles.navLink} ${activeSection === "OurClientsComponent" ? styles.navLinkActive : ""}`}
-              href="#OurClientsComponent"
-              onClick={() => setActiveSection("OurClientsComponent")}
+              className={`${styles.navLink} ${activeSection === "Clientes" ? styles.navLinkActive : ""}`}
+              href="#Clientes"
+              onClick={() => setActiveSection("Clientes")}
             >
               Clientes
             </a>
           </li>
           <li className={styles.navItem}>
             <a
-              className={`${styles.navLink} ${activeSection === "WeMakeDifferentComponent" ? styles.navLinkActive : ""}`}
-              href="#WeMakeDifferentComponent"
-              onClick={() => setActiveSection("WeMakeDifferentComponent")}
+              className={`${styles.navLink} ${activeSection === "Nosotros" ? styles.navLinkActive : ""}`}
+              href="#Nosotros"
+              onClick={() => setActiveSection("Nosotros")}
             >
               Nosotros
             </a>
           </li>
         </ul>
         <div className={styles["navbar-button"]}>
-          <CustomButton
-            variant="principal"
-            onClick={() => {
-              setActiveSection("ContactComponent");
-              window.location.href = "#ContactComponent";
-            }}
-          >
+          <CustomButton variant="principal" onClick={() => setActiveSection("contacto")}>
             Contactanos
           </CustomButton>
         </div>

@@ -1,6 +1,5 @@
 import { template } from "@/app/utils/email/template";
 import { NextResponse } from "next/server";
-import { validateRecaptchaToken } from "@/utils/recaptcha/recaptcha";
 const nodemailer = require("nodemailer");
 
 export interface FormRequestInterface {
@@ -12,7 +11,6 @@ export interface FormRequestInterface {
     phone: string;
     message: string;
   };
-  recaptchaToken: string;
 }
 
 export async function POST(req: Request) {
@@ -25,15 +23,6 @@ export async function POST(req: Request) {
 
   try {
     const body = (await req.json()) as FormRequestInterface;
-    
-    const isValidToken = await validateRecaptchaToken(body.recaptchaToken);
-    if (!isValidToken) {
-      return NextResponse.json(
-        { message: "Invalid reCAPTCHA token", status: 400 },
-        { status: 400 }
-      );
-    }
-
     const contentHtml = template(body);
 
     const transporter = nodemailer.createTransport({

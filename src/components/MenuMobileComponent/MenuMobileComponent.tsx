@@ -54,9 +54,7 @@ export default function MenuMobile() {
   return (
     <div className={`${styles["container-nav-mobile"]} ${openMenu && styles.active}`}>
       <div className={styles["menu-header"]}>
-        <a href="#bannerHero" onClick={closeMenu}>
-          <LogoMobile />
-        </a>
+        <LogoMobile />
         <div className={styles.iconMenuContainer} onClick={toggleMenu}>
           {openMenu ? <IconClose /> : <IconHamburger />}
         </div>
@@ -65,21 +63,19 @@ export default function MenuMobile() {
       <nav className={styles.navContainer}>
         <ul className={styles.navList} >
           <li className={`${styles.navItem} ${activeSection === "servicios" ? styles.active : ""}`}>
-            <a href="#WhatWeDoComponent" onClick={closeMenu}>Servicios</a>
+            <a href="#servicios" onClick={closeMenu}>SERVICIOS</a>
           </li>
           <li className={`${styles.navItem} ${activeSection === "herramientas" ? styles.active : ""}`}>
-            <a href="#OurApproachComponent" onClick={closeMenu}>Enfoque</a>
+            <a href="#herramientas" onClick={closeMenu}>ENFOQUE</a>
           </li>
           <li className={`${styles.navItem} ${activeSection === "clientes" ? styles.active : ""}`}>
-            <a href="#OurClientsComponent" onClick={closeMenu}>Clientes</a>
+            <a href="#Clientes" onClick={closeMenu}>CLIENTES</a>
           </li>
           <li className={`${styles.navItem} ${activeSection === "nosotros" ? styles.active : ""}`}>
-            <a href="#WeMakeDifferentComponent" onClick={closeMenu}>Nosotros</a>
+            <a href="#nosotros" onClick={closeMenu}>NOSOTROS</a>
           </li>
           <li className={`${styles.navItem} ${activeSection === "contacto" ? styles.active : ""}`}>
-            <CustomButton className={styles.buttonContact} variant="principal" onClick={() => {
-              closeMenu(); setActiveSection("ContactComponent");
-              window.location.href = "#ContactComponent"; }}>
+            <CustomButton className={styles.buttonContact} variant="principal" onClick={() => { closeMenu(); }}>
               Contactanos
             </CustomButton>
           </li>

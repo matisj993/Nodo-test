@@ -1,11 +1,10 @@
 "use client";
 
-import { ChangeEvent, FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, KeyboardEvent, useEffect, useState } from "react";
 import styles from "./ContactComponent.module.scss";
 import { motion, Variants } from "framer-motion";
 import NotifyComponent from "../NotifyComponent/NotifyComponent";
 import { useBreakpoints } from '@/app/hooks/useBreakpoints';
-import Script from "next/script";
 
 const textVariants: Variants = {
   offscreen: {
@@ -48,10 +47,7 @@ export const ContactComponent = ({
     email: '',
     phone: '',
   });
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const formRef = useRef<HTMLFormElement>(null);
-  const isSubmittingRef = useRef(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -97,89 +93,15 @@ export const ContactComponent = ({
     setIsButtonDisabled(!areAllFieldsValid || btnSubmitClicked);
   }, [formData, errors, btnSubmitClicked]);
 
-  useEffect(() => {
-    // Function to initialize ReCAPTCHA
-    const loadRecaptcha = () => {
-      if (window.grecaptcha) {
-        try {
-            // Check if the element exists before rendering
-            const container = document.getElementById("recaptcha-container");
-            if (container) {
-                window.grecaptcha.render("recaptcha-container", {
-                  sitekey: "6LdjyjYqAAAAAIwshw1FCgP0hHkL5Xht2s_NiarV", // Test key
-                    size: "invisible",
-                    badge: "inline",
-                    callback: (token: string) => {
-                      setCaptchaToken(token);
-                      if (isSubmittingRef.current && formRef.current) {
-                         // Create a synthetic event or call handleSubmit directly if possible
-                         // Since handleSubmit expects a FormEvent, we can try to invoke it
-                         // But we need to ensure the token is in the DOM or state before this runs.
-                         // setCaptchaToken is async, but we can pass the token directly if we modify the logic.
-                         // However, the hidden input relies on state.
-                         // We can manually set the hidden input value to ensure it's there.
-                         const hiddenInput = formRef.current.querySelector('input[name="recaptchaToken"]') as HTMLInputElement;
-                         if (hiddenInput) {
-                             hiddenInput.value = token;
-                         }
-                         
-                         // We need to call handleSubmit. Since we can't easily create a synthetic FormEvent that matches exactly what React expects and what handleSubmit uses (e.preventDefault),
-                         // we can just call handleSubmit with a mock object.
-                         handleSubmit({
-                             preventDefault: () => {},
-                             currentTarget: formRef.current
-                         } as unknown as FormEvent<HTMLFormElement>);
-                         
-                         isSubmittingRef.current = false;
-                         window.grecaptcha.reset();
-                      }
-                    },
-                    "expired-callback": () => {
-                      setCaptchaToken(null);
-                      isSubmittingRef.current = false;
-                    }
-                  });
-            }
-        } catch (error) {
-            console.error("Error rendering recaptcha", error);
-        }
-      }
-    };
-
-    // Check if grecaptcha is already loaded
-    if (window.grecaptcha) {
-      loadRecaptcha();
-    } else {
-      // If not, wait for it (handled by Script onLoad, but just in case)
-      // The Script tag below handles the loading.
-      // We can also poll or use the ready callback if needed, but Script onLoad is usually sufficient.
-      // However, since the script is external, we might need to wait for 'grecaptcha' to be available.
-      // We'll use a global callback for the script to call if needed, or just rely on the Script onLoad.
-      // Actually, the Script onLoad might fire before the 'render' method is ready if we don't use the 'render=explicit' param properly or if we don't wait for 'grecaptcha.ready'.
-      
-      // Better approach: define the onload callback
-      window.onloadCallback = () => {
-        loadRecaptcha();
-      }
-    }
-    
-    return () => {
-        // Cleanup if necessary
-    }
-  }, []);
-
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isButtonDisabled) {
-        isSubmittingRef.current = true;
-        if (window.grecaptcha) {
-            window.grecaptcha.execute();
-        }
+      handleSubmit(e);
     }
   };
 
   return (
-    <div className={styles["container-contact"]} id="ContactComponent">
+   <div className={styles["container-contact"]} id="contacto">
       <motion.section
         initial="offscreen"
         whileInView="onscreen"
@@ -298,7 +220,7 @@ export const ContactComponent = ({
             </div>
 
             <motion.h2 variants={textVariants} className={styles["title"]}>
-              Contactá con<br />
+              Contacta con<br />
               <span className={styles["title-white"]}>nosotros</span>
             </motion.h2>
           </div>
@@ -312,7 +234,6 @@ export const ContactComponent = ({
           className={styles["half-right"]}
         >
           <motion.form
-            ref={formRef}
             onSubmit={handleFormSubmit}
             encType="multipart/form-data"
             variants={textVariants}
@@ -400,12 +321,9 @@ export const ContactComponent = ({
               />
             </div>
 
-            <div id="recaptcha-container" className={styles["recaptcha-container"]}></div>
-            <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
-
             <button
               disabled={isButtonDisabled}
-              className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : styles["active"]}`}
+              className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : ""}`}
               type="submit"
             >
               Enviar mensaje
@@ -414,10 +332,6 @@ export const ContactComponent = ({
           <NotifyComponent notification={notification} />
         </motion.div>
       </motion.section>
-      <Script
-        src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        strategy="lazyOnload"
-      />
    </div>
   );
 };

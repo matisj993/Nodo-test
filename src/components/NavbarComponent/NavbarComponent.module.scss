@@ -15,25 +15,19 @@
   transition: all 0.4s ease;
   box-sizing: border-box;
   height: 7rem;
-  @media (max-width: 1600px) {
-    padding: 1.04688rem 1.86313rem 0.97975rem 1.73438rem;
-  }
 
   .navbar-content {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 1600px) {
-      padding: 1.04688rem 1.86313rem 0.97975rem 1.73438rem;
-    }
     @media (max-width: 768px) {
       display: inline;
     }
   }
 
   @media (max-width: 768px) {
-    padding: 0;
+    padding:0;
     background: #000738;
     border-radius: 0;
     top: 0;
@@ -53,6 +47,7 @@
   margin: 0;
   padding: 0;
   gap: 3rem;
+
   @media (max-width: 768px) {
     display: none;
   }
@@ -60,12 +55,7 @@
 
 .logo {
   transition: opacity 0.3s ease-in-out;
-  svg {
-    @media (max-width: 1600px) {
-      width: 8.83019rem;
-      height: 3.31713rem;
-    }
-  }
+
   @media (max-width: 768px) {
     display: none;
   }
@@ -89,15 +79,14 @@
   opacity: 1;
 }
 
+
+
 .navLink {
   color: white;
   text-decoration: none;
   font-size: clamp(0.8rem, 0.6301rem + 0.7249vw, 1.5rem);
   position: relative;
   display: inline-block;
-  @media (max-width: 1600px) {
-    font-size: 1.125rem;
-  }
 
   &::before {
     content: "";

@@ -8,8 +8,6 @@
   flex-direction: column;
   gap: 2rem;
   margin-top: -198px;
-  display: flex;
-  align-items: center;
 
   @media (max-width: 768px) {
     padding: 2rem 1.5rem 1rem;
@@ -18,21 +16,18 @@
 }
 
 .footer-content {
-  max-width: 117.0625rem;
+  max-width: 1440px;
+  margin: 0 auto;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
-  padding: 0 5rem;
+  gap: 4rem;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
     gap: 2rem;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
   }
   @media (max-width: 768px) {
     flex-direction: column;
@@ -46,7 +41,7 @@
 .logo-section {
   flex-shrink: 0;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
   @media (max-width: 768px) {
@@ -73,7 +68,7 @@
   align-items: center;
   gap: 0.75rem;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
 }
@@ -102,13 +97,9 @@
 
 .contact-text {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
   margin: 0;
   line-height: 1.4;
-  font-size: var(--font-albert);
-  @media (max-width: 1300px) {
-    font-size: 0.875rem;
-  }
 
   @media (max-width: 768px) {
     font-size: 0.875rem;
@@ -121,7 +112,7 @@
   gap: 1rem;
   flex-shrink: 0;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     width: 100%;
     justify-content: flex-start;
   }
@@ -138,21 +129,16 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #fafafa;
+  background-color: #5edeff;
   transition: all 0.3s ease;
   text-decoration: none;
-  padding: .1rem ;
 
   &:hover {
-    background-color: #84e2ff;
+    background-color: #00c2ff;
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(94, 222, 255, 0.4);
   }
-  @media (max-width: 1300px) {
-    padding: 0;
-    width: 36px;
-    height: 36px;
-  }
+
   @media (max-width: 768px) {
     width: 36px;
     height: 36px;
@@ -178,7 +164,6 @@
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
-  
 
   @media (max-width: 768px) {
     padding-top: 1rem;
@@ -187,13 +172,9 @@
 
 .copyright-text {
   color: rgba(255, 255, 255, 0.6);
-  font-size: 1.25rem;
+  font-size: 0.8125rem;
   margin: 0;
   line-height: 1.4;
-  font-size: var(--font-albert);
-  @media (max-width: 1300px) {
-    font-size: 0.875rem;
-  }
 
   @media (max-width: 768px) {
     font-size: 0.75rem;

@@ -10,7 +10,7 @@ import { useBreakpoints } from "@/app/hooks/useBreakpoints";
 export const BannerComponent = () => {
   const {isMobile} = useBreakpoints();
   return (
-    <div className={styles["hero-container"]} id="bannerHero">
+    <div className={styles["hero-container"]}>
       <div className={styles["hero"]}>
         <div className={styles["heroTop"]}>
         </div>
