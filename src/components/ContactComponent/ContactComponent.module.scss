@@ -4,9 +4,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding-bottom: 14rem;
+  padding-bottom: 23rem;
     @media (max-width: 1300px) {
     padding: 9rem 6rem;
+    padding-bottom: 18rem;
   }
    @media (max-width: 770px) {
     padding: 2.7rem 1.5rem;
@@ -17,7 +18,6 @@
 
 .SubContainer {
   display: flex;
-  overflow: hidden;
   gap: 4rem;
   max-width: 1920px;
   margin: 0 auto; 
@@ -154,8 +154,9 @@
 
 .label {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 0.9375rem;
+  font-size: 1.5rem;
   font-weight: 400;
+  font-family:var(--font-barlow);
 
   @media (max-width: 768px) {
     font-size: 0.875rem;
@@ -163,16 +164,16 @@
 }
 
 .input {
-  padding: 0.875rem 1rem;
+  padding: 1.5rem 2.4375rem;
   box-sizing: border-box;
   border-radius: 6.25rem;
   border: 1.5px solid #00bfe0;
   width: 100%;
-  height: 3rem;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
   font-size: 0.9375rem;
   transition: all 0.3s ease;
+   font-family:var(--font-barlow);
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.4);
@@ -180,11 +181,19 @@
   }
 
   &:focus {
-    border: 2px solid #5edeff;
+    border: 2px solid rgb(92, 222, 255);
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 0 3px rgba(94, 222, 255, 0.1);
     outline: none;
   }
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover, 
+  &:-webkit-autofill:focus, 
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px rgba(92, 222, 255, 0) inset !important;
+     transition: background-color 50000s ease-in-out 0s;
+     -webkit-text-fill-color: white !important;
+    }
 
   @media (max-width: 768px) {
     height: 2.75rem;
@@ -193,17 +202,17 @@
 }
 
 .input-text-area {
-  padding: 0.875rem 1rem;
+  padding: 1.5rem 2.4375rem;
   box-sizing: border-box;
-  font-family: Montserrat, sans-serif;
   border: 1px solid #5edeff;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
   font-size: 0.9375rem;
-  border-radius: 0.5rem;
+  border-radius: 2.4375rem;
   resize: none;
   min-height: 120px;
   transition: all 0.3s ease;
+   font-family:var(--font-barlow);
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.4);
@@ -216,10 +225,27 @@
     box-shadow: 0 0 0 3px rgba(94, 222, 255, 0.1);
     outline: none;
   }
+  
 
   @media (max-width: 768px) {
     font-size: 0.875rem;
     min-height: 100px;
+  }
+}
+
+.recaptcha-container {
+  display: flex;
+     justify-content: right;
+  margin: 1rem 0;
+  z-index: 100;
+   @media (max-width: 1600px) {
+   position: relative;
+   right: 0;
+  }
+  
+  @media (max-width: 768px) {
+    transform: scale(0.85);
+    transform-origin: center;
   }
 }
 
@@ -241,7 +267,7 @@
   margin-top: 1rem;
   transition: all 0.3s ease;
 
-  &:hover {
+  .active &:hover {
     background-color: #00c2ff;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(94, 222, 255, 0.3);
@@ -256,8 +282,8 @@
 .disabled {
   cursor: not-allowed;
   border-radius: 3rem;
-  color: rgba(255, 255, 255, 0.3);
-  background: rgba(94, 222, 255, 0.2);
+  color: rgba(255, 255, 255, 0.37);
+  background: #5edfffb0;
   display: flex;
   font-size: 1rem;
   font-weight: 600;
@@ -271,6 +297,7 @@
   margin-top: 1rem;
 
   &:hover {
+   background: #5edfffb0;
     transform: none;
     box-shadow: none;
   }

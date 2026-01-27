@@ -5,6 +5,7 @@ import styles from "./ContactComponent.module.scss";
 import { motion, Variants } from "framer-motion";
 import NotifyComponent from "../NotifyComponent/NotifyComponent";
 import { useBreakpoints } from '@/app/hooks/useBreakpoints';
+import Script from "next/script";
 
 const textVariants: Variants = {
   offscreen: {
@@ -178,7 +179,7 @@ export const ContactComponent = ({
   };
 
   return (
-   <div className={styles["container-contact"]} id="contacto">
+    <div className={styles["container-contact"]} id="ContactComponent">
       <motion.section
         initial="offscreen"
         whileInView="onscreen"
@@ -297,7 +298,7 @@ export const ContactComponent = ({
             </div>
 
             <motion.h2 variants={textVariants} className={styles["title"]}>
-              Contacta con<br />
+              Contactá con<br />
               <span className={styles["title-white"]}>nosotros</span>
             </motion.h2>
           </div>
@@ -311,6 +312,7 @@ export const ContactComponent = ({
           className={styles["half-right"]}
         >
           <motion.form
+            ref={formRef}
             onSubmit={handleFormSubmit}
             encType="multipart/form-data"
             variants={textVariants}
@@ -398,9 +400,12 @@ export const ContactComponent = ({
               />
             </div>
 
+            <div id="recaptcha-container" className={styles["recaptcha-container"]}></div>
+            <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
+
             <button
               disabled={isButtonDisabled}
-              className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : ""}`}
+              className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : styles["active"]}`}
               type="submit"
             >
               Enviar mensaje
@@ -409,6 +414,10 @@ export const ContactComponent = ({
           <NotifyComponent notification={notification} />
         </motion.div>
       </motion.section>
+      <Script
+        src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        strategy="lazyOnload"
+      />
    </div>
   );
 };

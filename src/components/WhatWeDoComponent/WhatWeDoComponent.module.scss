@@ -1,7 +1,6 @@
 .container-section-about {
   max-width: 1920px;
   margin: 0 auto;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,39 +28,58 @@
   .top-text-about-title {
     .text-blue {
       color: var(--Secundario-2, #00bfe0);
-      font-size: clamp(2.44688rem, 2.0547rem + 1.6731vw, 4.0625rem);
+      font-size: 4.0625rem;
       font-style: normal;
       font-weight: 300;
       line-height: normal;
       margin: 0;
+      @media screen and (max-width: 1600px) {
+        font-size: 3.04688rem;
+      }
+      @media screen and (max-width: 768px) {
+        font-size: 2.0547rem;
+      }
     }
     .title {
       color: var(--Primario-2, #000d65);
-      font-size: clamp(2.44688rem, 1.7817rem + 2.8382vw, 5.1875rem);
+      font-size: 5.1875rem;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
       margin-bottom: 1.88rem;
       margin: 0;
       padding-left: 4rem;
+      @media screen and (max-width: 1600px) {
+        font-size: 3.89063rem;
+      }
+      @media screen and (max-width: 768px) {
+        font-size: 1.7817rem;
+      }
     }
     .subtite-about {
       color: var(--helby-webflow-ecommerce-webflow-io-black, #000);
-      font-size: clamp(0.875rem, 0.7233rem + 0.6472vw, 1.5rem);
+      font-size: 1.5rem;
       font-style: normal;
       font-weight: 400;
       line-height: 2.25rem;
       max-width: 50rem;
       margin-bottom: 3.12rem;
+      font-family: var(--font-barlow);
+      @media screen and (max-width: 1600px) {
+        font-size: 1.125rem;
+      }
+
       @media screen and (max-width: 640px) {
-      margin-bottom: 1.88rem;
-      margin-top: 0;
-       line-height: 1.6rem;
-    }
+        font-size: 0.7233rem;
+        margin-bottom: 1.88rem;
+        margin-top: 0;
+        line-height: 1.6rem;
+      }
     }
   }
   .bottom-description-text {
     display: flex;
+    gap: .98rem;
     @media screen and (max-width: 640px) {
       flex-wrap: wrap;
       gap: 1.54rem;
@@ -71,7 +89,17 @@
       flex-direction: column;
       gap: 0rem;
       margin: 0;
-      font-size: clamp(0.875rem, 0.7536rem + 0.5178vw, 1.375rem);
+      font-size: 1.375rem;
+      font-family:var(--font-barlow);
+      @media screen and (max-width: 1600px) {
+        font-size: 1.25rem;
+      }
+       @media screen and (max-width: 1200px) {
+        font-size: 1rem;
+      }
+      @media screen and (max-width: 640px) {
+        font-size: 0.7536rem;
+      }
     }
     .description-text {
       color: var(--helby-webflow-ecommerce-webflow-io-black, #000);
@@ -95,10 +123,20 @@
       }
       strong {
         color: var(--Primario-2, #000d65);
-        font-size: clamp(0.875rem, 0.6828rem + 0.8199vw, 1.66669rem);
+        font-family: var(--font-albert);
+        font-size: 1.66669rem;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+        @media screen and (max-width: 1600px) {
+          font-size: 1.25rem;
+        }
+        @media screen and (max-width: 1200px) {
+          font-size: 1rem;
+        }
+        @media screen and (max-width: 640px) {
+          font-size: 0.6828rem;
+        }
       }
     }
   }
@@ -107,7 +145,7 @@
   @media screen and (max-width: 1200px) {
     width: 50%;
   }
-   @media screen and (max-width: 640px) {
+  @media screen and (max-width: 640px) {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -115,12 +153,11 @@
   }
   img {
     width: 100%;
-    height: auto;
     object-fit: cover; // Asegura que se vea completa
     object-position: left;
     @media screen and (max-width: 640px) {
-    width: 400px;
-    margin-right: -4.5rem;
-  }
+      width: 400px;
+      margin-right: -4.5rem;
+    }
   }
 }

@@ -24,15 +24,18 @@
 
   @media (max-width: 768px) {
     width: revert;
-    padding: 0 1.5rem;
   }
 }
 .heroTop {
-  height: 10%;
+  @media (max-width: 1600px) {
+    padding-bottom: 1.5rem;
+  }
+  @media (max-width: 760px) {
+   height: 20%;
+  }
 }
 .heroBottom {
   display: flex;
-  margin-bottom: 5rem;
   gap: 1.81rem;
   padding-left: 10rem;
   @media (max-width: 1200px) {
@@ -107,6 +110,9 @@
   justify-content: start;
   padding-left: 10rem;
   @media (max-width: 1200px) {
+    margin-bottom: 5rem;
+  }
+  @media (max-width: 1200px) {
     padding-left: 6rem;
   }
 
@@ -127,31 +133,44 @@
 }
 .textBlue {
   color: var(--Secundario-0, #5edeff);
-  font-size: clamp(2.44688rem, 2.0547rem + 1.6731vw, 4.0625rem);
+  font-size:  4.0625rem;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
   margin: 0;
+  @media screen and (max-width: 1600px) {
+    font-size: 3.22044rem;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 2.0547rem;
+  }
 }
 
 .subtitle {
   color: #fff;
-  font-size: clamp(2.44688rem, 1.7817rem + 2.8382vw, 5.1875rem);
+  font-size:5.1875rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   margin: 0;
+   @media (max-width: 1600px) {
+    font-size: 4.106rem;
+  }
 
   @media (max-width: 768px) {
+    font-size: 1.7817rem;
   }
 }
 .subtitleBefore {
   color: #fff;
-  font-size: clamp(2.44688rem, 1.7817rem + 2.8382vw, 5.1875rem);
+  font-size:  5.1875rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   margin: 0;
+  @media (max-width: 1600px) {
+    font-size: 4.106rem;
+  }
 
   display: flex;
   align-items: end;
@@ -159,6 +178,7 @@
   @media screen and (max-width: 768px) {
     align-items: start;
     gap: 10px;
+    font-size:  1.7817rem;
   }
 
   &::before {

@@ -54,7 +54,9 @@ export default function MenuMobile() {
   return (
     <div className={`${styles["container-nav-mobile"]} ${openMenu && styles.active}`}>
       <div className={styles["menu-header"]}>
-        <LogoMobile />
+        <a href="#bannerHero" onClick={closeMenu}>
+          <LogoMobile />
+        </a>
         <div className={styles.iconMenuContainer} onClick={toggleMenu}>
           {openMenu ? <IconClose /> : <IconHamburger />}
         </div>
@@ -63,19 +65,21 @@ export default function MenuMobile() {
       <nav className={styles.navContainer}>
         <ul className={styles.navList} >
           <li className={`${styles.navItem} ${activeSection === "servicios" ? styles.active : ""}`}>
-            <a href="#servicios" onClick={closeMenu}>SERVICIOS</a>
+            <a href="#WhatWeDoComponent" onClick={closeMenu}>Servicios</a>
           </li>
           <li className={`${styles.navItem} ${activeSection === "herramientas" ? styles.active : ""}`}>
-            <a href="#herramientas" onClick={closeMenu}>ENFOQUE</a>
+            <a href="#OurApproachComponent" onClick={closeMenu}>Enfoque</a>
           </li>
           <li className={`${styles.navItem} ${activeSection === "clientes" ? styles.active : ""}`}>
-            <a href="#Clientes" onClick={closeMenu}>CLIENTES</a>
+            <a href="#OurClientsComponent" onClick={closeMenu}>Clientes</a>
           </li>
           <li className={`${styles.navItem} ${activeSection === "nosotros" ? styles.active : ""}`}>
-            <a href="#nosotros" onClick={closeMenu}>NOSOTROS</a>
+            <a href="#WeMakeDifferentComponent" onClick={closeMenu}>Nosotros</a>
           </li>
           <li className={`${styles.navItem} ${activeSection === "contacto" ? styles.active : ""}`}>
-            <CustomButton className={styles.buttonContact} variant="principal" onClick={() => { closeMenu(); }}>
+            <CustomButton className={styles.buttonContact} variant="principal" onClick={() => {
+              closeMenu(); setActiveSection("ContactComponent");
+              window.location.href = "#ContactComponent"; }}>
               Contactanos
             </CustomButton>
           </li>
