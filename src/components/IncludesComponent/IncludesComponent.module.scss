@@ -117,7 +117,8 @@
     line-height: normal;
     display: flex;
     gap: 0.8rem;
-    @media screen and (max-width: 1300px) {
+    font-family: var(--font-barlow);
+    @media screen and (max-width: 1600px) {
       font-size: 1.3rem;
     }
     @media screen and (max-width: 768px) {

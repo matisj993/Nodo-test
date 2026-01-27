@@ -11,7 +11,7 @@ export const OurApproachComponent = () => {
     ];
 
     return (
-        <section className={styles["section-approach"]}>
+        <section className={styles["section-approach"]} id="OurApproachComponent">
             <div className={styles["container-approach"]}>
                 {/* Left Side - Image with circular frame */}
                 <motion.div
@@ -23,7 +23,7 @@ export const OurApproachComponent = () => {
                 >
                     <div className={styles["image-wrapper"]}>
                         {/* Placeholder for image - replace with actual image */}
-                        <Image src={isMobile ? "/img/OurApproachComponent/leftImgMobile.png" : "/img/OurApproachComponent/leftImg.png"} alt="Our Approach" width={750 } height={600} />
+                        <Image src={isMobile ? "/img/OurApproachComponent/leftImgMobile.png" : "/img/OurApproachComponent/leftImg.png"} alt="Our Approach" width={700 } height={500} />
                     </div>
                 </motion.div>
 

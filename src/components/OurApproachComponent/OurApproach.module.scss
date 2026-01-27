@@ -36,14 +36,13 @@
 /* Left Side - Image */
 .image-container {
   position: relative;
-  max-width: 40%;
+  max-width: 50%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
   @media (max-width: 1024px) {
-    max-width: 400px;
   }
 
   @media (max-width: 768px) {
@@ -97,10 +96,13 @@
   height: 100%;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: start;
+   @media screen and (max-width: 1681px){
+     justify-content: end;
+   }
   img{
-    width: 100%;
-    height: auto;
-    object-fit: cover; // Asegura que se vea completa
     object-position: left; // La imagen se queda pegada a la izquierda del div
    @media screen and (max-width: 640px){
     object-fit: contain;
@@ -180,8 +182,9 @@
 
 .subtitle {
   font-size: clamp(0.875rem, 0.7233rem + 0.6472vw, 1.5rem);
-  color: #333;
+  color: #000;
   margin: 0;
+  font-family: var(--font-barlow);
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -190,8 +193,9 @@
 
 .description {
   font-size: clamp(0.875rem, 0.7233rem + 0.6472vw, 1.5rem);
-  color: #444;
+  color: #000;
   margin: 0;
+  font-family: var(--font-barlow);
 
   @media (max-width: 768px) {
     font-size: 0.9375rem;
@@ -200,7 +204,8 @@
 
 .bold-blue {
   font-weight: 700;
-  color: #5edeff;
+  color: #00BFE0;
+  font-family: var(--font-barlow);
 }
 
 /* Platform Badges */
@@ -223,12 +228,13 @@
   padding: 0.625rem 1.5rem;
   border: 1px solid #5edeff;
   border-radius: 50px;
-  font-size: 0.9375rem;
-  color: #333;
+  font-size: 1.08938rem;
+  color: #000;
   background-color: transparent;
   transition: all 0.3s ease;
   white-space: nowrap;
   cursor: pointer;
+  font-family: var(--font-barlow);
 
   &:hover {
     background-color: #5edeff;

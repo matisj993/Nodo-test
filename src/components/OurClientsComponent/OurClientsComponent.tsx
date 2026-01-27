@@ -4,13 +4,14 @@ import styles from "./OurClientsComponent.module.scss";
 import { motion } from "framer-motion";
 import { useBreakpoints } from "@/app/hooks/useBreakpoints";
 import { IconsBloop , IconsYouKnow , IconsNesta , IconAv , IconSuper, IconRentas, IconLaVoz, IconGranDiet, IconMutual, IconNina, IconGoldePack, IconsSpace} from "./IconsClients";
+import Image from "next/image";
 
 export const OurClientsComponent = () => {
     const { isMobile } = useBreakpoints();
     const clientCategories = [
         {
             category: "Agencias Partners",
-            clients: [<IconsBloop />, <IconsYouKnow />, <IconsNesta />,<IconAv />, "MADIBA", <IconSuper/>]
+            clients: [<IconsBloop />, <IconsYouKnow />, <IconsNesta />, <IconAv />, <Image src="/img/ClientsComponent/image781.png" alt="Madiba" width={85} height={20}/>, <IconSuper/>]
         },
         {
             category: "Anunciantes",
@@ -19,7 +20,7 @@ export const OurClientsComponent = () => {
     ];
 
     return (
-        <section className={styles["section-clients"]} id="Clientes">
+        <section className={styles["section-clients"]} id="OurClientsComponent">
             <div className={styles["container-clients"]}>
                 {/* Left Side - Title and Description */}
                 <motion.div

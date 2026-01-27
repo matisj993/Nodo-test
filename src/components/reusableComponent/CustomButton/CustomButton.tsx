@@ -18,7 +18,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     const buttonClasses = `${styles.button} ${styles[variant]} ${className}`.trim();
 
     return (
-        <button className={buttonClasses} {...props}>
+        <button className={buttonClasses} {...props} onClick={props.onClick}>
             {children}
         </button>
     );
