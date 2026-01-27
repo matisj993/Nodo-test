@@ -31,7 +31,7 @@
     padding-bottom: 1.5rem;
   }
   @media (max-width: 760px) {
-   height: 20%;
+   height: 0%;
   }
 }
 .heroBottom {
@@ -119,6 +119,7 @@
   @media (max-width: 768px) {
     justify-content: center;
     padding-left: 0rem;
+    margin-bottom: 0;
   }
 }
 
@@ -142,7 +143,7 @@
     font-size: 3.22044rem;
   }
   @media screen and (max-width: 768px) {
-    font-size: 2.0547rem;
+    font-size: 3.19606rem;
   }
 }
 
@@ -158,7 +159,7 @@
   }
 
   @media (max-width: 768px) {
-    font-size: 1.7817rem;
+   font-size: 3.76706rem;
   }
 }
 .subtitleBefore {
@@ -178,7 +179,7 @@
   @media screen and (max-width: 768px) {
     align-items: start;
     gap: 10px;
-    font-size:  1.7817rem;
+   font-size: 3.76706rem;
   }
 
   &::before {

@@ -81,7 +81,7 @@ export const WhatWeDoComponent = () => {
         <Image
           src={isMobile ? "/img/WhatWeDoComponent/WhatWeDoMobile.png" : "/img/WhatWeDoComponent/WhatWeDo.png"}
           alt=""
-          width={isMobile ? 609 : 700}
+          width={isMobile ? 325 : 700}
           height={isMobile ? 263 : 500}
         />
       </motion.div>

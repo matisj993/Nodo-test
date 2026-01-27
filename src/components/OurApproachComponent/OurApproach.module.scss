@@ -102,6 +102,10 @@
    @media screen and (max-width: 1681px){
      justify-content: end;
    }
+   @media screen and (max-width: 640px){
+    overflow: revert;
+     justify-content: left;
+   }
   img{
     object-position: left; // La imagen se queda pegada a la izquierda del div
    @media screen and (max-width: 640px){

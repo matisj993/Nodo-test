@@ -23,7 +23,7 @@ export const OurApproachComponent = () => {
                 >
                     <div className={styles["image-wrapper"]}>
                         {/* Placeholder for image - replace with actual image */}
-                        <Image src={isMobile ? "/img/OurApproachComponent/leftImgMobile.png" : "/img/OurApproachComponent/leftImg.png"} alt="Our Approach" width={700 } height={500} />
+                        <Image src={isMobile ? "/img/OurApproachComponent/leftImgMobile.png" : "/img/OurApproachComponent/leftImg.png"} alt="Our Approach" width={isMobile ? 325 : 700 } height={isMobile ? 263 : 500} />
                     </div>
                 </motion.div>
 
