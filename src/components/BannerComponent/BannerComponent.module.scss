@@ -144,7 +144,7 @@
     font-size: 3.22044rem;
   }
   @media screen and (max-width: 768px) {
-    font-size: 3.19606rem;
+    font-size: 2.4rem;
   }
 }
 
@@ -160,7 +160,7 @@
   }
 
   @media (max-width: 768px) {
-   font-size: 3.76706rem;
+   font-size: 2.8rem;
   }
 }
 .subtitleBefore {
@@ -180,7 +180,7 @@
   @media screen and (max-width: 768px) {
     align-items: start;
     gap: 10px;
-   font-size: 3.76706rem;
+   font-size: 2.8rem;
   }
 
   &::before {
@@ -192,7 +192,7 @@
     flex-shrink: 0;
     margin-bottom: 1.5rem;
     @media screen and (max-width: 768px) {
-      margin-top: 2.9rem;
+      margin-top: 2rem;
       margin-bottom: 0;
     }
   }
