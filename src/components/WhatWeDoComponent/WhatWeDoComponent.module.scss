@@ -156,7 +156,6 @@
     object-fit: cover; // Asegura que se vea completa
     object-position: left;
     @media screen and (max-width: 640px) {
-      width: 400px;
       margin-right: -4.5rem;
       object-fit: fill;
     }
