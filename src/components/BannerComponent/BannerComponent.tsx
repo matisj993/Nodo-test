@@ -5,10 +5,12 @@ import styles from "./BannerComponent.module.scss";
 import { motion } from "framer-motion";
 import CustomButton from "../reusableComponent/CustomButton/CustomButton";
 import { useBreakpoints } from "@/app/hooks/useBreakpoints";
+import { useState } from "react";
 
 
 export const BannerComponent = () => {
   const {isMobile} = useBreakpoints();
+  const [activeSection, setActiveSection] = useState<string>("");
   return (
     <div className={styles["hero-container"]} id="bannerHero">
       <div className={styles["hero"]}>
@@ -46,10 +48,16 @@ export const BannerComponent = () => {
               {isMobile ? "crezca con estrategia" : "con estrategia"}
             </motion.p>
             <div className={styles["banner-button-container"]}>
-              <CustomButton variant="principal">
+              <CustomButton onClick={() => {
+                setActiveSection("ContactComponent");
+                window.location.href = "#ContactComponent";
+              }} variant="principal">
                 Contactanos
               </CustomButton>
-              <CustomButton variant="secundary">
+              <CustomButton onClick={() => {
+                setActiveSection("WhatWeDoComponent");
+                window.location.href = "#WhatWeDoComponent";
+              }} variant="secundary">
                 Conocé los servicios
               </CustomButton>
             </div>
