@@ -33,7 +33,7 @@
 
 /* Left Side - Animated Circle and Title */
 .half-left {
-  width: 50%;
+  width: 60%;
   position: relative;
   display: flex;
   justify-content: center;
@@ -52,7 +52,7 @@
   justify-content: center;
   gap: 2rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 650px;
 
   @media (max-width: 768px) {
     gap: 1.5rem;

@@ -23,6 +23,37 @@ export const IncludesComponent = () => {
     },
   };
 
+  const circleVariants: Variants = {
+    offscreen: {
+      pathLength: 0,
+      opacity: 0,
+    },
+    onscreen: (custom: { duration: number; delay?: number }) => ({
+      pathLength: 0.75,
+      opacity: 1,
+      transition: {
+        duration: custom.duration,
+        delay: custom.delay || 0,
+        ease: "easeInOut",
+      },
+    }),
+  };
+
+  const dotVariants: Variants = {
+    offscreen: {
+      rotate: 0,
+      opacity: 0,
+    },
+    onscreen: {
+      rotate: 270,
+      opacity: 1,
+      transition: {
+        duration: 2,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
    <section className={styles["section-includes"]}>
       <div className={styles["container-includes"]}>
@@ -40,6 +71,7 @@ export const IncludesComponent = () => {
                 viewBox="0 0 650 650"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                style={{ maxWidth: "100%", height: "auto" }}
               >
                 {/* Círculo azul - carga inicial y luego oscilación lenta */}
                 <motion.g
@@ -62,22 +94,18 @@ export const IncludesComponent = () => {
                     r="260"
                     stroke="url(#paint0_linear)"
                     strokeWidth="40"
-                    opacity="1"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 0.75 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 2, ease: "easeInOut" }}
+                    strokeLinecap="round"
+                    strokeDasharray="0 1"
+                    variants={circleVariants}
+                    custom={{ duration: 2 }}
                     style={{ originX: "325px", originY: "325px" }}
                   />
                   {/* Punto del círculo azul - aparece con el trazo */}
                   <motion.g
-                    initial={{ rotate: 0, opacity: 0 }}
-                    whileInView={{ rotate: 270, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 2, ease: "easeInOut" }}
+                    variants={dotVariants}
                     style={{ originX: "325px", originY: "325px" }}
                   >
-                    <circle cx="585" cy="310" r="25" fill="#00C2FF" />
+                    <circle cx="585" cy="320" r="25" fill="#00C2FF" />
                   </motion.g>
                 </motion.g>
                 <defs>
@@ -115,15 +143,23 @@ export const IncludesComponent = () => {
                     r="300"
                     stroke="white"
                     strokeWidth="2"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 0.7 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 2.5, ease: "easeInOut" }}
+                    strokeLinecap="round"
+                    strokeDasharray="0 1"
+                    variants={circleVariants}
+                    custom={{ duration: 2.5 }}
                     style={{ originX: "325px", originY: "325px" }}
                   />
                   {/* Punto blanco en la punta del círculo - calculado correctamente */}
                   
-                  <motion.circle initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 2.5 }}  cx="230" cy="40" r="5" fill="white" />
+                  <motion.circle 
+                    initial={{ opacity: 0 }} 
+                    whileInView={{ opacity: 1 }} 
+                    transition={{ duration: 2, delay: 2.5 }}  
+                    cx="330" 
+                    cy="25" 
+                    r="5" 
+                    fill="white" 
+                  />
                 
                 </motion.g>
               </svg>
