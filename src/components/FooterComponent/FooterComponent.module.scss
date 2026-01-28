@@ -85,6 +85,9 @@
    @media (max-width: 1024px) {
    gap: 0;
   }
+    @media (max-width: 640px) {
+    align-items: start;
+  }
 }
 
 .icon-location,
@@ -112,6 +115,7 @@
 
   @media (max-width: 768px) {
     font-size: 0.875rem;
+    text-align: center;
   }
 }
 
