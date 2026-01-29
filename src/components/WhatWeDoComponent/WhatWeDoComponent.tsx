@@ -79,10 +79,10 @@ export const WhatWeDoComponent = () => {
         transition={{ duration: 2 }}
         className={styles['right-img-about']}>
         <Image
-          src={isMobile ? "/img/WhatWeDoComponent/WhatWeDoMobile.png" : "/img/WhatWeDoComponent/WhatWeDo.png"}
+          src="/img/WhatWeDoComponent/ReemplazoImage.png"
           alt=""
-          width={isMobile ? 325 : 700}
-          height={isMobile ? 263 : 500}
+          width={isMobile ? 325 : 645}
+          height={isMobile ? 263 : 524}
         />
       </motion.div>
     </div>

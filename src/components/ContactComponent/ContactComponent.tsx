@@ -108,7 +108,7 @@ export const ContactComponent = ({
                 window.grecaptcha.render("recaptcha-container", {
                   sitekey: "6LdjyjYqAAAAAIwshw1FCgP0hHkL5Xht2s_NiarV", // Test key
                     size: "invisible",
-                    badge: "inline",
+                    badge: "bottomright",
                     callback: (token: string) => {
                       setCaptchaToken(token);
                       if (isSubmittingRef.current && formRef.current) {
@@ -210,11 +210,12 @@ export const ContactComponent = ({
   };
 
   return (
-    <div className={styles["container-contact"]} id="ContactComponent">
+    <motion.div className={styles["container-contact"]} id="ContactComponent" onViewportEnter={() => document.body.classList.add("show-recaptcha")}
+      onViewportLeave={() => document.body.classList.remove("show-recaptcha")}>
       <motion.section
         initial="offscreen"
         whileInView="onscreen"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: false, amount: 0.1 }}
         id="contacto"
         className={styles["SubContainer"]}
       >
@@ -428,10 +429,7 @@ export const ContactComponent = ({
               />
             </div>
 
-            <div id="recaptcha-container" className={styles["recaptcha-container"]}></div>
-            <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
-
-            <button
+              <button
               disabled={isButtonDisabled}
               className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : styles["active"]}`}
               type="submit"
@@ -441,11 +439,14 @@ export const ContactComponent = ({
           </motion.form>
           <NotifyComponent notification={notification} />
         </motion.div>
+        
       </motion.section>
       <Script
         src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         strategy="lazyOnload"
       />
-   </div>
+      <div id="recaptcha-container" className={styles["recaptcha-container"]}></div>
+      <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
+   </motion.div>
   );
 };

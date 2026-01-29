@@ -15,3 +15,26 @@ body {
   overflow-x: hidden;
   font-family: var(--font-albert), sans-serif;
 }
+
+.grecaptcha-badge {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0% !important;
+  z-index: 1000 !important;
+  width: 70px !important;
+  overflow: hidden !important;
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+body.show-recaptcha .grecaptcha-badge {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: none !important;
+  animation: none !important;
+}
