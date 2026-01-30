@@ -16,22 +16,12 @@ export interface FormRequestInterface {
 }
 
 export async function POST(req: Request) {
-  console.log("--- Contact API Request Started ---");
 
   const recipients = [
     process.env.EMAIL_USERNAME,
     process.env.EMAIL_USERNAME2,
     process.env.EMAIL_USERNAME3,
   ];
-
-  // Debug: Check environment variables
-  const envVars = {
-    EMAIL_SERVICE: !!process.env.EMAIL_SERVICE,
-    EMAIL_USERNAME: !!process.env.EMAIL_USERNAME,
-    EMAIL_PASSWORD: !!process.env.EMAIL_PASSWORD,
-    RECAPTCHA_SECRET_KEY: !!process.env.RECAPTCHA_SECRET_KEY,
-  };
-  console.log("Environment Variables status:", envVars);
 
   try {
     const body = (await req.json()) as FormRequestInterface;
@@ -62,30 +52,22 @@ export async function POST(req: Request) {
 
     const mailOptions = {
       from: `${process.env.EMAIL_USERNAME}`,
-      to: recipients.filter(Boolean) as string[], // Filter out undefined recipients
+      to: recipients,
       subject: "NODO PAID MEDIA",
       html: contentHtml
     };
 
-    console.log("Attempting to send mail with options:", { ...mailOptions, html: "[HTML Content]" });
     await transporter.sendMail(mailOptions);
-    console.log("Mail sent successfully!");
 
     return NextResponse.json(
       { message: "Message sent", status: 200 },
       { status: 200 }
     );
   } catch (error: any) {
-    console.error("Unexpected error in Contact API:", error);
+    console.error("Error in contact API:", error);
     return NextResponse.json(
-      { 
-        message: "Message not sent", 
-        status: 400, 
-        debug: error.message || "Unknown error" 
-      },
+      { message: "Message not sent", error: error.message, status: 400 },
       { status: 400 }
     );
-  } finally {
-    console.log("--- Contact API Request Finished ---");
   }
 }

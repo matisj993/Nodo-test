@@ -429,7 +429,6 @@ export const ContactComponent = ({
               />
             </div>
 
-              <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
               <button
               disabled={isButtonDisabled}
               className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : styles["active"]}`}
@@ -437,6 +436,7 @@ export const ContactComponent = ({
             >
               Enviar mensaje
             </button>
+            <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
           </motion.form>
           <NotifyComponent notification={notification} />
         </motion.div>
