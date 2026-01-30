@@ -24,12 +24,11 @@ export const ContactContainer = () => {
           const name = formData.get('name') as string;
           const lastName = formData.get('lastName') as string;
           const email = formData.get('email') as string;
-          const city = formData.get('city') as string;
           const phone = formData.get('phone') as string;
           const message = formData.get('message') as string;
           const recaptchaToken = formData.get('recaptchaToken') as string;
           await submitForm({
-            formData: { name, lastName, city, email, message, phone},
+            formData: { name, lastName, email, message, phone},
             recaptchaToken
           });
 
@@ -47,18 +46,20 @@ export const ContactContainer = () => {
           name: string,
           lastName: string;
           email: string,
-          city: string,
           phone: string,
           message: string,
         },
         recaptchaToken: string
       }) => {
+          const body = JSON.stringify({ formData, recaptchaToken });
+          console.log("Sending request to /api/contact with body:", body);
+          
           const response = await fetch(`${window.location.origin}/api/contact`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ formData, recaptchaToken })
+            body: body
           });
     
           const respuesta = await response.json();

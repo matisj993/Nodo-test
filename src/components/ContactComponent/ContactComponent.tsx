@@ -429,6 +429,7 @@ export const ContactComponent = ({
               />
             </div>
 
+              <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
               <button
               disabled={isButtonDisabled}
               className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : styles["active"]}`}
@@ -446,7 +447,6 @@ export const ContactComponent = ({
         strategy="lazyOnload"
       />
       <div id="recaptcha-container" className={styles["recaptcha-container"]}></div>
-      <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
    </motion.div>
   );
 };

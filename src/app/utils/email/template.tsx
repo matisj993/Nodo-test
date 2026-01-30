@@ -88,7 +88,7 @@ export const template = (body: FormRequestInterface) => {
                         <li><strong>Apellido: </strong>${lastName}</li>
                         <li><strong>Email: </strong><a href="mailto:${email}" class="link">${email}</a></li>
                         <li><strong>Teléfono: </strong>${phone}</li>
-                        <li><strong>Ciudad: </strong>${city}</li>
+                        ${city ? `<li><strong>Ciudad: </strong>${city}</li>` : ""}
                         
                         
                     </ul>
