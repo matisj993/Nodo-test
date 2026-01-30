@@ -59,7 +59,7 @@ export const ContactContainer = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: body
+            body: JSON.stringify({ formData, recaptchaToken })
           });
     
           const respuesta = await response.json();

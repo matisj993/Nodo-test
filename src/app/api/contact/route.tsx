@@ -35,31 +35,11 @@ export async function POST(req: Request) {
 
   try {
     const body = (await req.json()) as FormRequestInterface;
-    console.log("Request Body:", JSON.stringify(body, null, 2));
     
-    if (!body.recaptchaToken) {
-      console.error("Missing reCAPTCHA token in request body");
-      return NextResponse.json(
-        { message: "Missing reCAPTCHA token", status: 400 },
-        { status: 400 }
-      );
-    }
-
     const isValidToken = await validateRecaptchaToken(body.recaptchaToken);
-    console.log("reCAPTCHA validation result:", isValidToken);
-
     if (!isValidToken) {
       return NextResponse.json(
         { message: "Invalid reCAPTCHA token", status: 400 },
-        { status: 400 }
-      );
-    }
-
-    // Check if we have the necessary email config before proceeding
-    if (!process.env.EMAIL_SERVICE || !process.env.EMAIL_USERNAME || !process.env.EMAIL_PASSWORD) {
-      console.error("Critical email environment variables are missing!");
-      return NextResponse.json(
-        { message: "Server configuration error (Email)", status: 400 },
         { status: 400 }
       );
     }
