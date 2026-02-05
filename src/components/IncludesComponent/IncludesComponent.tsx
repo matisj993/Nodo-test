@@ -173,16 +173,17 @@ export const IncludesComponent = () => {
           </motion.div>
         </div>
         <motion.div
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.5 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 2 }}
           className={styles["right-text-includes"]}
         >
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 2.5 }}  className={styles["info-includes"]}>Estrategia de medios y <br /> objetivos de negocio</motion.p>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 2.5 }} className={styles["info-includes"]}>Análisis avanzado de <br /> métricas y reporting visual</motion.p>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 2.5 }} className={styles["info-includes"]}>Gestión y optimización de <br /> campañas</motion.p>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 2.5 }}  className={styles["info-includes"]}>Testing continuo</motion.p>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2, delay: 2.5 }} className={styles["info-includes"]}>Consultoría de performance <br /> y escalabilidad</motion.p>
+          <motion.p  className={styles["info-includes"]}>Estrategia de medios y <br /> objetivos de negocio</motion.p>
+          <motion.p  className={styles["info-includes"]}>Análisis avanzado de <br /> métricas y reporting visual</motion.p>
+          <motion.p  className={styles["info-includes"]}>Gestión y optimización de <br /> campañas</motion.p>
+          <motion.p  className={styles["info-includes"]}>Testing continuo</motion.p>
+          <motion.p  className={styles["info-includes"]}>Consultoría de performance <br /> y escalabilidad</motion.p>
         </motion.div>
       </div>
    </section>

@@ -39,6 +39,7 @@
     }
 
     &:hover {
+      transform: translateY(-2px);
       background: var(--Secundario-2, #00bfe0);
     }
   }
@@ -55,11 +56,18 @@
     border: 1.336px solid var(--Secundario-0, #5edeff);
     background: transparent;
     color: #fff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
     @media screen and (max-width: 1600px) {
       padding: 1.00206rem 1.50313rem;
     }
     @media screen and (max-width: 1200px) {
       padding: 0.6rem 0.8rem;
+    }
+
+    &:hover {
+      background: #5edeff30;
+      transform: translateY(-2px);
     }
   }
 }

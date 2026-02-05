@@ -21,7 +21,7 @@ body {
   visibility: hidden !important;
   pointer-events: none !important;
   position: absolute !important;
-  right: 0 !important;
+  right: -10rem !important;
   bottom: 0% !important;
   z-index: 1000 !important;
   width: 70px !important;

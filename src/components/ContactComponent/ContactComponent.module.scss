@@ -182,9 +182,8 @@
   }
 
   &:focus {
-    border: 2px solid rgb(92, 222, 255);
+   box-shadow: 0px 0px 7px 4px #5edeff5c;
     background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 0 3px rgba(94, 222, 255, 0.1);
     outline: none;
   }
   &:-webkit-autofill,
@@ -221,9 +220,8 @@
   }
 
   &:focus {
-    border: 2px solid #5edeff;
+    box-shadow: 0px 0px 7px 4px #5edeff5c;
     background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 0 3px rgba(94, 222, 255, 0.1);
     outline: none;
   }
   

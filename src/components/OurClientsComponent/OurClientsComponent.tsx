@@ -5,17 +5,22 @@ import { motion } from "framer-motion";
 import { useBreakpoints } from "@/app/hooks/useBreakpoints";
 import { IconsBloop , IconsYouKnow , IconsNesta , IconAv , IconSuper, IconRentas, IconLaVoz, IconGranDiet, IconMutual, IconNina, IconGoldePack, IconsSpace} from "./IconsClients";
 import Image from "next/image";
+import { useState } from "react";
 
 export const OurClientsComponent = () => {
     const { isMobile } = useBreakpoints();
+    const [isPaused, setIsPaused] = useState(false)
     const clientCategories = [
         {
             category: "Agencias Partners",
-            clients: [<IconsBloop />, <IconsYouKnow />, <IconsNesta />, <IconAv />, <Image src="/img/ClientsComponent/image781.png" alt="Madiba" width={85} height={20}/>, <IconSuper/>]
+            clients: [<IconsBloop />, <IconsYouKnow />, <IconsNesta />, <IconAv />, <Image src="/img/ClientsComponent/image781.png" alt="Madiba" width={85} height={20}/>, <IconSuper/>],
+            duration: 5
         },
         {
             category: "Anunciantes",
-            clients: [<IconRentas />, <IconLaVoz />, <IconGranDiet />, <IconMutual />, <IconNina />, <IconGoldePack />]
+            clients: [<IconRentas />, <IconLaVoz />, <IconGranDiet />, <IconMutual />, <IconNina />, <IconGoldePack />
+            ],
+            duration: 5
         }
     ];
 
@@ -44,51 +49,32 @@ export const OurClientsComponent = () => {
                 </motion.div>
 
                 {/* Right Side - Client Logos */}
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className={styles["content-right"]}
-                >
-                    {clientCategories.map((categoryData, categoryIndex) => (
-                        <div key={categoryIndex} className={styles["category-section"]}>
-                            <motion.h3
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: 0.3 + (categoryIndex * 0.1) }}
-                                className={styles["category-title"]}
-                            >
-                                {categoryData.category}
-                            </motion.h3>
+                <div className={styles["content-right-carousel"]}>
+                    {clientCategories.map((categoryData, idx) => (
+                        <div key={idx} className={styles["column-wrapper"]}>
+                            <h3 className={styles["category-title"]}>{categoryData.category}</h3>
 
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: 0.4 + (categoryIndex * 0.1) }}
-                                className={styles["clients-grid"]}
-                            >
-                                {categoryData.clients.map((client, index) => (
-                                    <div key={index} className={styles["client-logo"]}>
-                                        {client}
-                                    </div>
-                                ))}
-                            </motion.div>
+                            <div className={styles["viewport-vertical"]}>
+                                <motion.div
+                                    className={styles["track-vertical"]}
+                                    animate={{ y: isPaused ? undefined : ["0%", "-50%"] }}
+                                    transition={{
+                                        ease: "linear",
+                                        duration: 20, // Súbelo a 80 para probar
+                                        repeat: Infinity
+                                    }}
+                                >
+                                    {/* Lista duplicada para scroll infinito suave */}
+                                    {[...categoryData.clients, ...categoryData.clients].map((client, i) => (
+                                        <div key={i} className={styles["client-card"]}>
+                                            {client}
+                                        </div>
+                                    ))}
+                                </motion.div>
+                            </div>
                         </div>
                     ))}
-
-                    {/* Golden Pack - Special logo at bottom */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
-                        className={styles["golden-pack"]}
-                    >
-                    </motion.div>
-                </motion.div>
+                </div>
             </div>
         </section>
     );
