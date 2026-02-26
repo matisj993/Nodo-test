@@ -116,44 +116,10 @@ export const ContactComponent = ({
 
   useEffect(() => {
     // Function to initialize ReCAPTCHA
+    /* 
     const loadRecaptcha = () => {
-      if (window.grecaptcha) {
-        try {
-            const container = document.getElementById("recaptcha-container");
-            if (container) {
-                window.grecaptcha.render("recaptcha-container", {
-                  sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LdjyjYqAAAAAIwshw1FCgP0hHkL5Xht2s_NiarV", 
-                    size: "invisible",
-                    badge: "bottomright",
-                    callback: (token: string) => {
-                      setCaptchaToken(token);
-                      if (isSubmittingRef.current && formRef.current) {
-                         const hiddenInput = formRef.current.querySelector('input[name="recaptchaToken"]') as HTMLInputElement;
-                         if (hiddenInput) {
-                             hiddenInput.value = token;
-                         }
-                         
-                         handleSubmit({
-                             preventDefault: () => {},
-                             currentTarget: formRef.current
-                         } as unknown as FormEvent<HTMLFormElement>);
-                         
-                         isSubmittingRef.current = false;
-                         window.grecaptcha.reset();
-                      }
-                    },
-                    "expired-callback": () => {
-                      setCaptchaToken(null);
-                      isSubmittingRef.current = false;
-                    }
-                  });
-            }
-        } catch (error) {
-            console.error("Error rendering recaptcha", error);
-        }
-      }
+      // ... reCAPTCHA logic ...
     };
-
     if (window.grecaptcha) {
       loadRecaptcha();
     } else {
@@ -161,6 +127,7 @@ export const ContactComponent = ({
         loadRecaptcha();
       }
     }
+    */
   }, []);
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -168,10 +135,8 @@ export const ContactComponent = ({
     if (step < 4) {
         setStep(step + 1);
     } else if (isStepValid() && !btnSubmitClicked) {
-        isSubmittingRef.current = true;
-        if (window.grecaptcha) {
-            window.grecaptcha.execute();
-        }
+        // Bypass reCAPTCHA for staging/disconnected flow
+        handleSubmit(e);
     }
   };
 
@@ -647,11 +612,14 @@ export const ContactComponent = ({
         </motion.div>
         
       </motion.section>
+      {/* ReCAPTCHA disabled for Staging */}
+      {/* 
       <Script
         src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         strategy="lazyOnload"
       />
       <div id="recaptcha-container" className={styles["recaptcha-container"]}></div>
+      */}
    </motion.div>
   );
 };
