@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+// import prisma from "@/lib/prisma";
 import { calculateLeadTier, TierAnswers } from "@/utils/tierLogic";
 import { validateRecaptchaToken } from "@/utils/recaptcha/recaptcha";
 import { template } from "@/app/utils/email/template";
@@ -50,7 +50,8 @@ export async function POST(req: Request) {
     };
     const tier = calculateLeadTier(tierAnswers);
 
-    // 4. Persistence
+    // 4. Persistence (Disabled for Staging)
+    /*
     const lead = await prisma.lead.create({
       data: {
         nombre: formData.name,
@@ -60,9 +61,11 @@ export async function POST(req: Request) {
         proyectoTipo: formData.proyectoTipo,
         madurezDigital: formData.madurezDigital,
         presupuesto: formData.presupuesto,
-        tierCalculado: tier as any, // Cast to match Prisma enum
+        tierCalculado: tier as any,
       },
     });
+    */
+    const lead = { id: "mock-id", ...formData }; // Mock lead for webhook if needed
 
     // 5. Send Notification Email
     const recipients = [
