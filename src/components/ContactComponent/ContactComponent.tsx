@@ -2,7 +2,7 @@
 
 import { ChangeEvent, FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import styles from "./ContactComponent.module.scss";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import NotifyComponent from "../NotifyComponent/NotifyComponent";
 import { useBreakpoints } from '@/app/hooks/useBreakpoints';
 import Script from "next/script";
@@ -28,6 +28,7 @@ export const ContactComponent = ({
   handleSubmit,
   notification,
   btnSubmitClicked,
+  successData,
 }: {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   btnSubmitClicked: boolean;
@@ -35,13 +36,22 @@ export const ContactComponent = ({
     content: string;
     isOpen: boolean;
   };
+  successData: {
+      tier: string;
+      redirectUrl: string;
+  } | null;
 }) => {
   const { isDesktop } = useBreakpoints();
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
+    proyectoTipo: '',
+    madurezDigital: '',
+    presupuesto: '',
     name: '',
     lastName: '',
     email: '',
     phone: '',
+    web: '',
     message: '',
   });
   const [errors, setErrors] = useState({
@@ -49,7 +59,6 @@ export const ContactComponent = ({
     phone: '',
   });
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const formRef = useRef<HTMLFormElement>(null);
   const isSubmittingRef = useRef(false);
 
@@ -62,7 +71,7 @@ export const ContactComponent = ({
     return phone.length >= 10 && phone.length <= 15;
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
@@ -90,41 +99,40 @@ export const ContactComponent = ({
     }
   };
 
-  useEffect(() => {
-    const areAllFieldsValid = 
-    Object.values(formData).every(field => field.trim() !== '') &&
-    Object.values(errors).every(error => error === '');
-    setIsButtonDisabled(!areAllFieldsValid || btnSubmitClicked);
-  }, [formData, errors, btnSubmitClicked]);
+  const isStepValid = () => {
+    if (step === 1) return formData.proyectoTipo !== '';
+    if (step === 2) return formData.madurezDigital !== '';
+    if (step === 3) return formData.presupuesto !== '';
+    if (step === 4) {
+        return (
+            formData.name.trim() !== '' &&
+            formData.lastName.trim() !== '' &&
+            validateEmail(formData.email) &&
+            validatePhoneLength(formData.phone)
+        );
+    }
+    return true;
+  };
 
   useEffect(() => {
     // Function to initialize ReCAPTCHA
     const loadRecaptcha = () => {
       if (window.grecaptcha) {
         try {
-            // Check if the element exists before rendering
             const container = document.getElementById("recaptcha-container");
             if (container) {
                 window.grecaptcha.render("recaptcha-container", {
-                  sitekey: "6LdjyjYqAAAAAIwshw1FCgP0hHkL5Xht2s_NiarV", // Test key
+                  sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LdjyjYqAAAAAIwshw1FCgP0hHkL5Xht2s_NiarV", 
                     size: "invisible",
                     badge: "bottomright",
                     callback: (token: string) => {
                       setCaptchaToken(token);
                       if (isSubmittingRef.current && formRef.current) {
-                         // Create a synthetic event or call handleSubmit directly if possible
-                         // Since handleSubmit expects a FormEvent, we can try to invoke it
-                         // But we need to ensure the token is in the DOM or state before this runs.
-                         // setCaptchaToken is async, but we can pass the token directly if we modify the logic.
-                         // However, the hidden input relies on state.
-                         // We can manually set the hidden input value to ensure it's there.
                          const hiddenInput = formRef.current.querySelector('input[name="recaptchaToken"]') as HTMLInputElement;
                          if (hiddenInput) {
                              hiddenInput.value = token;
                          }
                          
-                         // We need to call handleSubmit. Since we can't easily create a synthetic FormEvent that matches exactly what React expects and what handleSubmit uses (e.preventDefault),
-                         // we can just call handleSubmit with a mock object.
                          handleSubmit({
                              preventDefault: () => {},
                              currentTarget: formRef.current
@@ -146,35 +154,36 @@ export const ContactComponent = ({
       }
     };
 
-    // Check if grecaptcha is already loaded
     if (window.grecaptcha) {
       loadRecaptcha();
     } else {
-      // If not, wait for it (handled by Script onLoad, but just in case)
-      // The Script tag below handles the loading.
-      // We can also poll or use the ready callback if needed, but Script onLoad is usually sufficient.
-      // However, since the script is external, we might need to wait for 'grecaptcha' to be available.
-      // We'll use a global callback for the script to call if needed, or just rely on the Script onLoad.
-      // Actually, the Script onLoad might fire before the 'render' method is ready if we don't use the 'render=explicit' param properly or if we don't wait for 'grecaptcha.ready'.
-      
-      // Better approach: define the onload callback
       window.onloadCallback = () => {
         loadRecaptcha();
       }
-    }
-    
-    return () => {
-        // Cleanup if necessary
     }
   }, []);
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isButtonDisabled) {
+    if (step < 4) {
+        setStep(step + 1);
+    } else if (isStepValid() && !btnSubmitClicked) {
         isSubmittingRef.current = true;
         if (window.grecaptcha) {
             window.grecaptcha.execute();
         }
+    }
+  };
+
+  const nextStep = () => {
+    if (isStepValid()) {
+        setStep(step + 1);
+    }
+  };
+
+  const prevStep = () => {
+    if (step > 1) {
+        setStep(step - 1);
     }
   };
 
@@ -209,9 +218,16 @@ export const ContactComponent = ({
     },
   };
 
+  const formStepVariants: Variants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -50 }
+  };
+
   return (
     <motion.div className={styles["container-contact"]} id="ContactComponent" onViewportEnter={() => document.body.classList.add("show-recaptcha")}
       onViewportLeave={() => document.body.classList.remove("show-recaptcha")}>
+
       <motion.section
         initial="offscreen"
         whileInView="onscreen"
@@ -219,7 +235,6 @@ export const ContactComponent = ({
         id="contacto"
         className={styles["SubContainer"]}
       >
-        {/* Left Side - Animated Circle and Title */}
         <motion.div
           initial="offscreen"
           whileInView="onscreen"
@@ -236,7 +251,6 @@ export const ContactComponent = ({
                 xmlns="http://www.w3.org/2000/svg"
                 style={{ maxWidth: "100%", height: "auto" }}
               >
-                {/* Círculo azul - carga inicial y luego oscilación lenta */}
                 <motion.g
                   style={{ originX: "325px", originY: "325px" }}
                   initial={{ rotate: -90 }}
@@ -263,7 +277,6 @@ export const ContactComponent = ({
                     custom={{ duration: 2 }}
                     style={{ originX: "325px", originY: "325px" }}
                   />
-                  {/* Punto del círculo azul - aparece con el trazo */}
                   <motion.g
                     variants={dotVariants}
                     style={{ originX: "325px", originY: "325px" }}
@@ -285,7 +298,6 @@ export const ContactComponent = ({
                   </linearGradient>
                 </defs>
 
-                {/* Círculo blanco - oscilación lenta */}
                 <motion.g
                   style={{ originX: "325px", originY: "325px" }}
                   initial={{ rotate: -90 }}
@@ -312,7 +324,6 @@ export const ContactComponent = ({
                     custom={{ duration: 2.5 }}
                     style={{ originX: "325px", originY: "325px" }}
                   />
-                  {/* Punto blanco en la punta del círculo - calculado correctamente */}
                   <motion.circle
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -333,111 +344,305 @@ export const ContactComponent = ({
           </div>
         </motion.div>
 
-        {/* Right Side - Form */}
         <motion.div
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.2 }}
           className={styles["half-right"]}
         >
-          <motion.form
-            ref={formRef}
-            onSubmit={handleFormSubmit}
-            encType="multipart/form-data"
-            variants={textVariants}
-            className={styles["form-container"]}
-          >
-            <div className={styles["input-row"]}>
-              <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
-                <label className={styles["label"]} htmlFor="name">
-                  Nombre*
-                </label>
-                <input
-                  placeholder="Escribí tu nombre"
-                  className={styles["input"]}
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  onKeyDown={handleKeyDown}
-                />
-              </div>
-              <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
-                <label className={styles["label"]} htmlFor="lastName">
-                  Apellido*
-                </label>
-                <input
-                  placeholder="Escribí tu apellido"
-                  className={styles["input"]}
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  onKeyDown={handleKeyDown}
-                />
-              </div>
-            </div>
+          <AnimatePresence mode="wait">
+            {btnSubmitClicked && !successData ? (
+              <motion.div
+                key="loading"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className={styles["loader-container"]}
+              >
+                <div className={styles["spinner"]}></div>
+                <p className={styles["loader-text"]}>Enviando tu solicitud...</p>
+              </motion.div>
+            ) : successData ? (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ type: "spring", damping: 20, stiffness: 100 }}
+                className={styles["success-inline-container"]}
+              >
+                <div className={styles["success-card-inline"]}>
+                  <h2 className={styles["success-title"]}>¡Gracias por enviar!</h2>
+                  
+                  {successData.tier === "TIER_C" ? (
+                      <p className={styles["success-text"]}>
+                        Por el volumen de tu inversión, hoy la mejor forma de ayudarte es con <strong>NodoAI</strong>, nuestro experto en pauta.
+                      </p>
+                  ) : (
+                      <p className={styles["success-text"]}>
+                          Analizaremos tu caso. <strong>Agendá</strong> una llamada con nuestro equipo comercial para conocer tu ecosistema.
+                      </p>
+                  )}
 
-            <div className={styles["input-row"]}>
-              <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
-                <label className={styles["label"]} htmlFor="email">
-                  Correo electrónico*
-                </label>
-                <input
-                  placeholder="Ej: ejemplo@gmail.com"
-                  className={styles["input"]}
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
-                {errors.email && <span className={styles["error"]}>{errors.email}</span>}
-              </div>
-              <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
-                <label className={styles["label"]} htmlFor="phone">
-                  Teléfono*
-                </label>
-                <input
-                  placeholder="Ej: 3514329365"
-                  className={styles["input"]}
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  onKeyDown={handleKeyDown}
-                />
-                {errors.phone && <span className={styles["error"]}>{errors.phone}</span>}
-              </div>
-            </div>
+                  <a 
+                      href={successData.redirectUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={styles["success-button"]}
+                  >
+                      {successData.tier === "TIER_C" ? "Hablar con NodoAI" : "Agendá ahora"}
+                  </a>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.form
+                key="form"
+                ref={formRef}
+                onSubmit={handleFormSubmit}
+                encType="multipart/form-data"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className={styles["form-container"]}
+              >
+                <div className={styles["steps-indicator"]}>
+                    Paso {step} de 4
+                </div>
 
-            <div className={styles["input-container"]}>
-              <label className={styles["label"]} htmlFor="message">
-                Mensaje*
-              </label>
-              <textarea
-                className={styles["input-text-area"]}
-                id="message"
-                name="message"
-                rows={4}
-                placeholder="Escribí acá por qué te interesa contactarnos."
-                value={formData.message}
-                onChange={handleInputChange}
-              />
-            </div>
+                {step === 1 && (
+                    <motion.div 
+                        key="step1"
+                        variants={formStepVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className={styles["step-content"]}
+                    >
+                        <h3 className={styles["step-title"]}>¿Cuál es el objetivo principal de tu proyecto?</h3>
+                        <div className={styles["radio-group"]}>
+                            {[
+                                { id: "p1-a", value: "E-commerce / Ventas Directas.", label: "E-commerce / Ventas Directas" },
+                                { id: "p1-b", value: "Generación de Leads (Servicios, B2B, Real Estate).", label: "Generación de Leads (Servicios, B2B, Real Estate)" },
+                                { id: "p1-c", value: "Branding / Posicionamiento de Marca.", label: "Branding / Posicionamiento de Marca" },
+                                { id: "p1-d", value: "Marketing Político.", label: "Marketing Político" },
+                            ].map((opt) => (
+                                <div key={opt.id} className={styles["radio-option"]}>
+                                    <input 
+                                        type="radio" 
+                                        id={opt.id} 
+                                        name="proyectoTipo" 
+                                        value={opt.value} 
+                                        checked={formData.proyectoTipo === opt.value}
+                                        onChange={handleInputChange}
+                                    />
+                                    <label htmlFor={opt.id}>{opt.label}</label>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
 
-              <button
-              disabled={isButtonDisabled}
-              className={`${styles["button"]} ${isButtonDisabled ? styles["disabled"] : styles["active"]}`}
-              type="submit"
-            >
-              Enviar mensaje
-            </button>
-            <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
-          </motion.form>
+                {step === 2 && (
+                    <motion.div 
+                        key="step2"
+                        variants={formStepVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className={styles["step-content"]}
+                    >
+                        <h3 className={styles["step-title"]}>¿Cuál es tu experiencia actual en pauta digital?</h3>
+                        <div className={styles["radio-group"]}>
+                            {[
+                                { id: "p2-a", value: "Ya invierto en pauta y quiero escalar/optimizar.", label: "Ya invierto en pauta y quiero escalar/optimizar" },
+                                { id: "p2-b", value: "Invertí antes pero no obtuve resultados.", label: "Invertí antes pero no obtuve resultados" },
+                                { id: "p2-c", value: "Nunca he invertido en publicidad digital.", label: "Nunca he invertido en publicidad digital" },
+                            ].map((opt) => (
+                                <div key={opt.id} className={styles["radio-option"]}>
+                                    <input 
+                                        type="radio" 
+                                        id={opt.id} 
+                                        name="madurezDigital" 
+                                        value={opt.value} 
+                                        checked={formData.madurezDigital === opt.value}
+                                        onChange={handleInputChange}
+                                    />
+                                    <label htmlFor={opt.id}>{opt.label}</label>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+
+                {step === 3 && (
+                    <motion.div 
+                        key="step3"
+                        variants={formStepVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className={styles["step-content"]}
+                    >
+                        <h3 className={styles["step-title"]}>¿Qué presupuesto mensual estiman invertir (ARS)?</h3>
+                        <div className={styles["radio-group"]}>
+                            {[
+                                { id: "p3-a", value: "Menos de $500.000.", label: "Menos de $500.000" },
+                            { id: "p3-b", value: "Entre $500.000 y $1.500.000 aproximadamente", label: "Entre $500.000 y $1.500.000 aproximadamente" },
+                            { id: "p3-c", value: "Entre $1.500.000 y $2.500.000 aproximadamente", label: "Entre $1.500.000 y $2.500.000 aproximadamente" },
+                                { id: "p3-d", value: "Más de $2.500.000.", label: "Más de $2.500.000" },
+                            ].map((opt) => (
+                                <div key={opt.id} className={styles["radio-option"]}>
+                                    <input 
+                                        type="radio" 
+                                        id={opt.id} 
+                                        name="presupuesto" 
+                                        value={opt.value} 
+                                        checked={formData.presupuesto === opt.value}
+                                        onChange={handleInputChange}
+                                    />
+                                    <label htmlFor={opt.id}>{opt.label}</label>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+
+                {step === 4 && (
+                    <motion.div 
+                        key="step4"
+                        variants={formStepVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className={styles["step-content"]}
+                    >
+                        <h3 className={styles["step-title"]}>Por último, tus datos de contacto</h3>
+                        <div className={styles["input-row"]}>
+                        <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
+                            <label className={styles["label"]} htmlFor="name">Nombre*</label>
+                            <input
+                            placeholder="Escribí tu nombre"
+                            className={styles["input"]}
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
+                            />
+                        </div>
+                        <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
+                            <label className={styles["label"]} htmlFor="lastName">Apellido*</label>
+                            <input
+                            placeholder="Escribí tu apellido"
+                            className={styles["input"]}
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
+                            />
+                        </div>
+                        </div>
+
+                        <div className={styles["input-row"]}>
+                        <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
+                            <label className={styles["label"]} htmlFor="email">Correo electrónico*</label>
+                            <input
+                            placeholder="Ej: ejemplo@gmail.com"
+                            className={styles["input"]}
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            />
+                            {errors.email && <span className={styles["error"]}>{errors.email}</span>}
+                        </div>
+                        <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
+                            <label className={styles["label"]} htmlFor="phone">Teléfono*</label>
+                            <input
+                            placeholder="Ej: 3514329365"
+                            className={styles["input"]}
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
+                            />
+                            {errors.phone && <span className={styles["error"]}>{errors.phone}</span>}
+                        </div>
+                        </div>
+
+                        <div className={styles["input-container"]}>
+                          <label className={styles["label"]} htmlFor="web">Sitio web</label>
+                        <input
+                            placeholder="Ej: www.tuempresa.com"
+                            className={styles["input"]}
+                            type="text"
+                            id="web"
+                            name="web"
+                            value={formData.web}
+                            onChange={handleInputChange}
+                        />
+                        </div>
+
+                        <div className={styles["input-container"]}>
+                        <label className={styles["label"]} htmlFor="message">Mensaje (Opcional)</label>
+                        <textarea
+                            className={styles["input-text-area"]}
+                            id="message"
+                            name="message"
+                            rows={3}
+                            placeholder="Escribí acá por qué te interesa contactarnos."
+                            value={formData.message}
+                            onChange={handleInputChange}
+                        />
+                        </div>
+                        
+                        <input type="hidden" name="proyectoTipo" value={formData.proyectoTipo} />
+                        <input type="hidden" name="madurezDigital" value={formData.madurezDigital} />
+                        <input type="hidden" name="presupuesto" value={formData.presupuesto} />
+                    </motion.div>
+                )}
+
+                <div className={styles["button-container-multi"]}>
+                    {step > 1 && (
+                        <button 
+                            type="button" 
+                            onClick={prevStep} 
+                            className={styles["button-back"]}
+                            disabled={btnSubmitClicked}
+                        >
+                            Volver
+                        </button>
+                    )}
+                    
+                    {step < 4 ? (
+                        <button 
+                            type="button" 
+                            onClick={nextStep} 
+                            className={`${styles["button"]} ${!isStepValid() ? styles["disabled"] : styles["active"]}`}
+                            disabled={!isStepValid()}
+                        >
+                            Siguiente
+                        </button>
+                    ) : (
+                        <button
+                            disabled={!isStepValid() || btnSubmitClicked}
+                            className={`${styles["button"]} ${(!isStepValid() || btnSubmitClicked) ? styles["disabled"] : styles["active"]}`}
+                            type="submit"
+                        >
+                            {btnSubmitClicked ? "Enviando..." : "Enviar mensaje"}
+                        </button>
+                    )}
+                </div>
+
+                <input type="hidden" name="recaptchaToken" value={captchaToken || ""} />
+              </motion.form>
+            )}
+          </AnimatePresence>
           <NotifyComponent notification={notification} />
         </motion.div>
         

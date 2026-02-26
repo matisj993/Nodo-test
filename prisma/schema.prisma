@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Lead {
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  
+  // Respuestas del Formulario
+  proyectoTipo    String   // P1: E-commerce, Leads, Branding, etc. 
+  madurezDigital  String   // P2: Ya invierto, Invertí antes, Nunca. 
+  presupuesto     String   // P3: Rango de presupuesto en ARS. 
+  
+  // Datos de Contacto (P4)
+  nombre          String
+  email           String
+  telefono        String
+  web             String?
+  
+  // Lógica de Negocio
+  tierCalculado   Tier     // TIER_A, TIER_B, TIER_C 
+  sourceUrl       String?  // Para tracking de marketing
+}
+
+enum Tier {
+  TIER_A
+  TIER_B
+  TIER_C
+}

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.2",
     "framer-motion": "^11.2.13",
     "next": "16.1.1",
     "nodemailer": "^7.0.12",
@@ -23,6 +24,7 @@
     "@types/react-dom": "19.2.3",
     "eslint": "^9.0.0",
     "eslint-config-next": "latest",
+    "prisma": "^6.19.2",
     "typescript": "^5"
   },
   "overrides": {

@@ -175,7 +175,7 @@ export const IncludesComponent = () => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 2 }}
           className={styles["right-text-includes"]}
         >

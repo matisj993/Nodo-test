@@ -1,7 +1,8 @@
 import { FormRequestInterface } from "@/app/api/contact/route";
 
-export const template = (body: FormRequestInterface) => {
-    const { name, lastName, email, phone, city, message } = body.formData;
+export const template = (body: any) => {
+    const { name, lastName, email, phone, city, message, proyectoTipo, madurezDigital, presupuesto } = body.formData;
+    const tier = body.tierCalculado;
 
     return `
     <!DOCTYPE html>
@@ -9,7 +10,7 @@ export const template = (body: FormRequestInterface) => {
     
     <head>
         <meta charset="UTF-8">
-        <title>NUEVO MENSAJE</title>
+        <title>NUEVO LEAD - ${tier}</title>
         <style>
             body {
                 margin: 0;
@@ -78,7 +79,7 @@ export const template = (body: FormRequestInterface) => {
     <body>
         <div class="container">
             <div class="header">
-                <h1>NODO PAID MEDIA</h1>
+                <h1>NODO PAID MEDIA - LEAD CALIFICADO: ${tier}</h1>
             </div>
             <div class="content">
                 <div class="personal-info">
@@ -88,7 +89,13 @@ export const template = (body: FormRequestInterface) => {
                         <li><strong>Apellido: </strong>${lastName}</li>
                         <li><strong>Email: </strong><a href="mailto:${email}" class="link">${email}</a></li>
                         <li><strong>Teléfono: </strong>${phone}</li>
-                        ${city ? `<li><strong>Ciudad: </strong>${city}</li>` : ""}
+                    </ul>
+                    
+                    <h2>Información del Proyecto:</h2>
+                    <ul>
+                        <li><strong>Tipo de Proyecto: </strong>${proyectoTipo}</li>
+                        <li><strong>Madurez Digital: </strong>${madurezDigital}</li>
+                        <li><strong>Presupuesto Mensual: </strong>${presupuesto}</li>
                     </ul>
                 </div>
             </div>
