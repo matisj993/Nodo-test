@@ -24,9 +24,11 @@ model Lead {
   
   // Datos de Contacto (P4)
   nombre          String
+  apellido        String
   email           String
   telefono        String
   web             String?
+  descripcion     String?
   
   // Lógica de Negocio
   tierCalculado   Tier     // TIER_A, TIER_B, TIER_C 

@@ -64,34 +64,44 @@ export const ContactContainer = () => {
         formData: any,
         recaptchaToken: string
       }) => {
-          // Simulation for staging - Decoupled from Backend
-          console.log("Staging Mode: Simulating submission...", formData);
-          
-          // 1. Calculate Tier client-side
-          const tier = calculateLeadTier({
-              proyectoTipo: formData.proyectoTipo,
-              madurezDigital: formData.madurezDigital,
-              presupuesto: formData.presupuesto,
+          const response = await fetch(`${window.location.origin}/api/leads/submit`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ formData, recaptchaToken })
           });
+    
+          const respuesta = await response.json();
+          console.log("API Response:", respuesta);
+    
+          if (response.ok && respuesta.status === 200) {
+            setBtnSubmitClicked(false);
+            
+            const tier = respuesta.tier;
+            const redirects = respuesta.redirects || {};
+            const redirectUrl = redirects[tier] || "";
 
-          // 2. Define Redirect URLs (Accessible in Staging/Vercel)
-          const redirects: Record<string, string> = {
-              TIER_A: process.env.NEXT_PUBLIC_CALENDLY_TIER_A_URL || "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3sM7CDnyCy4jybbHYNEYy1ucBUCCESWZu6HQPmG4Vp7Hrw6SANbBJQjprxdXh4FNXoqOj0Q2df",
-              TIER_B: process.env.NEXT_PUBLIC_CALENDLY_TIER_B_URL || "https://calendly.com/ramiro-pereyra-25watts/30min",
-              TIER_C: process.env.NEXT_PUBLIC_NODO_GPT_URL || "https://gemini.google.com/gem/1-tfS2V40dIJZYujWHlkkcNMRn6DWsQx9?usp=sharing"
-          };
+            setSuccessData({
+                tier,
+                redirectUrl
+            });
 
-          const redirectUrl = redirects[tier] || redirects.TIER_C;
-
-          // 3. Simulate network delay for the spinner
-          await new Promise(resolve => setTimeout(resolve, 2000));
-
-          // 4. Set Success State
-          setBtnSubmitClicked(false);
-          setSuccessData({
-              tier,
-              redirectUrl
-          });
+            return;
+          } else {
+            setBtnSubmitClicked(false);
+            setNotification({
+              content: "Ocurrió un error al procesar tu solicitud. Intentá nuevamente.",
+              isOpen: true,
+            });
+            setTimeout(() => {
+              setNotification({
+                content: "",
+                isOpen: false,
+              });
+            }, 5000);
+            return;
+          }
     } 
 
     return(

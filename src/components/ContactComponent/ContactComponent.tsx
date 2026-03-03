@@ -115,19 +115,51 @@ export const ContactComponent = ({
   };
 
   useEffect(() => {
-    // Function to initialize ReCAPTCHA
-    /* 
     const loadRecaptcha = () => {
-      // ... reCAPTCHA logic ...
+      if (window.grecaptcha) {
+        try {
+            const container = document.getElementById("recaptcha-container");
+            if (container) {
+                window.grecaptcha.render("recaptcha-container", {
+                  sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6LdjyjYqAAAAAIwshw1FCgP0hHkL5Xht2s_NiarV", 
+                    size: "invisible",
+                    badge: "bottomright",
+                    callback: (token: string) => {
+                      setCaptchaToken(token);
+                      if (isSubmittingRef.current && formRef.current) {
+                         const hiddenInput = formRef.current.querySelector('input[name="recaptchaToken"]') as HTMLInputElement;
+                         if (hiddenInput) {
+                             hiddenInput.value = token;
+                         }
+                         
+                         handleSubmit({
+                             preventDefault: () => {},
+                             currentTarget: formRef.current
+                         } as unknown as FormEvent<HTMLFormElement>);
+                         
+                         isSubmittingRef.current = false;
+                         window.grecaptcha.reset();
+                      }
+                    },
+                    "expired-callback": () => {
+                      setCaptchaToken(null);
+                      isSubmittingRef.current = false;
+                    }
+                  });
+            }
+        } catch (error) {
+            console.error("Error rendering recaptcha", error);
+        }
+      }
     };
+
     if (window.grecaptcha) {
       loadRecaptcha();
     } else {
       window.onloadCallback = () => {
         loadRecaptcha();
-      }
+      };
     }
-    */
   }, []);
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -135,8 +167,10 @@ export const ContactComponent = ({
     if (step < 4) {
         setStep(step + 1);
     } else if (isStepValid() && !btnSubmitClicked) {
-        // Bypass reCAPTCHA for staging/disconnected flow
-        handleSubmit(e);
+        isSubmittingRef.current = true;
+        if (window.grecaptcha) {
+            window.grecaptcha.execute();
+        }
     }
   };
 
@@ -485,7 +519,6 @@ export const ContactComponent = ({
                         <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
                             <label className={styles["label"]} htmlFor="name">Nombre*</label>
                             <input
-                            placeholder="Escribí tu nombre"
                             className={styles["input"]}
                             type="text"
                             id="name"
@@ -498,7 +531,6 @@ export const ContactComponent = ({
                         <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
                             <label className={styles["label"]} htmlFor="lastName">Apellido*</label>
                             <input
-                            placeholder="Escribí tu apellido"
                             className={styles["input"]}
                             type="text"
                             id="lastName"
@@ -514,7 +546,6 @@ export const ContactComponent = ({
                         <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
                             <label className={styles["label"]} htmlFor="email">Correo electrónico*</label>
                             <input
-                            placeholder="Ej: ejemplo@gmail.com"
                             className={styles["input"]}
                             type="email"
                             id="email"
@@ -527,7 +558,6 @@ export const ContactComponent = ({
                         <div className={`${styles["input-container"]} ${styles["input-container-half"]}`}>
                             <label className={styles["label"]} htmlFor="phone">Teléfono*</label>
                             <input
-                            placeholder="Ej: 3514329365"
                             className={styles["input"]}
                             type="tel"
                             id="phone"
@@ -543,7 +573,6 @@ export const ContactComponent = ({
                         <div className={styles["input-container"]}>
                           <label className={styles["label"]} htmlFor="web">Sitio web</label>
                         <input
-                            placeholder="Ej: www.tuempresa.com"
                             className={styles["input"]}
                             type="text"
                             id="web"
@@ -560,7 +589,6 @@ export const ContactComponent = ({
                             id="message"
                             name="message"
                             rows={3}
-                            placeholder="Escribí acá por qué te interesa contactarnos."
                             value={formData.message}
                             onChange={handleInputChange}
                         />
@@ -612,14 +640,11 @@ export const ContactComponent = ({
         </motion.div>
         
       </motion.section>
-      {/* ReCAPTCHA disabled for Staging */}
-      {/* 
       <Script
         src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         strategy="lazyOnload"
       />
       <div id="recaptcha-container" className={styles["recaptcha-container"]}></div>
-      */}
    </motion.div>
   );
 };
