@@ -424,7 +424,7 @@ export const ContactComponent = ({
                                 { id: "p1-c", value: "Branding / Posicionamiento de Marca.", label: "Branding / Posicionamiento de Marca" },
                                 { id: "p1-d", value: "Marketing Político.", label: "Marketing Político" },
                             ].map((opt) => (
-                                <div key={opt.id} className={styles["radio-option"]}>
+                                <label key={opt.id} className={styles["radio-option"]}>
                                     <input 
                                         type="radio" 
                                         id={opt.id} 
@@ -433,8 +433,8 @@ export const ContactComponent = ({
                                         checked={formData.proyectoTipo === opt.value}
                                         onChange={handleInputChange}
                                     />
-                                    <label htmlFor={opt.id}>{opt.label}</label>
-                                </div>
+                                    <span>{opt.label}</span>
+                                </label>
                             ))}
                         </div>
                     </motion.div>
@@ -456,7 +456,7 @@ export const ContactComponent = ({
                                 { id: "p2-b", value: "Invertí antes pero no obtuve resultados.", label: "Invertí antes pero no obtuve resultados" },
                                 { id: "p2-c", value: "Nunca he invertido en publicidad digital.", label: "Nunca he invertido en publicidad digital" },
                             ].map((opt) => (
-                                <div key={opt.id} className={styles["radio-option"]}>
+                                <label key={opt.id} className={styles["radio-option"]}>
                                     <input 
                                         type="radio" 
                                         id={opt.id} 
@@ -465,8 +465,8 @@ export const ContactComponent = ({
                                         checked={formData.madurezDigital === opt.value}
                                         onChange={handleInputChange}
                                     />
-                                    <label htmlFor={opt.id}>{opt.label}</label>
-                                </div>
+                                    <span>{opt.label}</span>
+                                </label>
                             ))}
                         </div>
                     </motion.div>
@@ -489,7 +489,7 @@ export const ContactComponent = ({
                             { id: "p3-c", value: "Entre $1.500.000 y $2.500.000 aproximadamente", label: "Entre $1.500.000 y $2.500.000 aproximadamente" },
                                 { id: "p3-d", value: "Más de $2.500.000.", label: "Más de $2.500.000" },
                             ].map((opt) => (
-                                <div key={opt.id} className={styles["radio-option"]}>
+                                <label key={opt.id} className={styles["radio-option"]}>
                                     <input 
                                         type="radio" 
                                         id={opt.id} 
@@ -498,8 +498,8 @@ export const ContactComponent = ({
                                         checked={formData.presupuesto === opt.value}
                                         onChange={handleInputChange}
                                     />
-                                    <label htmlFor={opt.id}>{opt.label}</label>
-                                </div>
+                                    <span>{opt.label}</span>
+                                </label>
                             ))}
                         </div>
                     </motion.div>
