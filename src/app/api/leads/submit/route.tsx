@@ -51,20 +51,26 @@ export async function POST(req: Request) {
     const tier = calculateLeadTier(tierAnswers);
 
     // 4. Persistence
-    const lead = await prisma.lead.create({
-      data: {
-        nombre: formData.name,
-        apellido: formData.lastName,
-        email: formData.email,
-        telefono: formData.phone,
-        web: formData.web,
-        descripcion: formData.message,
-        proyectoTipo: formData.proyectoTipo,
-        madurezDigital: formData.madurezDigital,
-        presupuesto: formData.presupuesto,
-        tierCalculado: tier as any, // Cast to match Prisma enum
-      },
-    });
+    let lead = null;
+    try {
+      lead = await prisma.lead.create({
+        data: {
+          nombre: formData.name,
+          apellido: formData.lastName,
+          email: formData.email,
+          telefono: formData.phone,
+          web: formData.web,
+          descripcion: formData.message,
+          proyectoTipo: formData.proyectoTipo,
+          madurezDigital: formData.madurezDigital,
+          presupuesto: formData.presupuesto,
+          tierCalculado: tier as any, // Cast to match Prisma enum
+        },
+      });
+    } catch (dbError) {
+      console.error("Database persistence failed (expected on Vercel with SQLite):", dbError);
+      // We continue even if DB fails to ensure email and redirect work
+    }
 
     // 5. Send Notification Email
     const recipients = [
@@ -115,7 +121,7 @@ export async function POST(req: Request) {
                 body: JSON.stringify({
                     event: "new_lead",
                     lead: {
-                        ...lead,
+                        ...(lead || {}),
                         fullName: `${formData.name} ${formData.lastName}`
                     }
                 })
