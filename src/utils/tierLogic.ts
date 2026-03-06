@@ -22,18 +22,20 @@ export const calculateLeadTier = (answers: TierAnswers): Tier => {
   // Criterio 2: P1-A o B (Ventas/Leads) + P2-A (Ya invierte) + P3-C ($1.5M a $2.5M)
   const isVentasOLeads = proyectoTipo === "E-commerce / Ventas Directas." || proyectoTipo === "Generación de Leads (Servicios, B2B, Real Estate).";
   const yaInvierte = madurezDigital === "Ya invierto en pauta y quiero escalar/optimizar.";
-  const presupuestoMedioAlto = presupuesto === "Entre $1.500.000 y $2.500.000.";
+  const presupuestoMedioAlto = presupuesto === "Entre $1.500.000 y $2.500.000 aproximadamente";
 
   if (isVentasOLeads && yaInvierte && presupuestoMedioAlto) {
     return Tier.TIER_A;
   }
 
   // Criterio TIER B
-  // Criterio: P1 (Cualquiera) + P2 (A o B) + P3-B ($500k a $1.5M)
+  // Criterio: P1 (Cualquiera) + P2 (A o B) + P3-B o C ($500k a $2.5M)
   const yaOInvertiAntes = yaInvierte || madurezDigital === "Invertí antes pero no obtuve resultados.";
-  const presupuestoMedio = presupuesto === "Entre $500.000 y $1.500.000.";
+  const presupuestoRangoMedio = 
+    presupuesto === "Entre $500.000 y $1.500.000 aproximadamente" || 
+    presupuesto === "Entre $1.500.000 y $2.500.000 aproximadamente";
 
-  if (yaOInvertiAntes && presupuestoMedio) {
+  if (yaOInvertiAntes && presupuestoRangoMedio) {
     return Tier.TIER_B;
   }
 
