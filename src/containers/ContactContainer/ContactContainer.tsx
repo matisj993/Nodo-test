@@ -87,6 +87,17 @@ export const ContactContainer = () => {
                 redirectUrl
             });
 
+            // Push to dataLayer for GTM
+            if (typeof window !== 'undefined') {
+                (window as any).dataLayer = (window as any).dataLayer || [];
+                (window as any).dataLayer.push({
+                    event: 'form_contact_success',
+                    form_id: `contact_form_${tier}`,
+                    lead_tier: tier,
+                    status: 'success'
+                });
+            }
+
             return;
           } else {
             setBtnSubmitClicked(false);
